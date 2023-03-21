@@ -1,0 +1,6 @@
+C:\Users\Insha sadaf\source\repos\dataServices\bin\Debug\dataServices.dll
+C:\Users\Insha sadaf\source\repos\dataServices\bin\Debug\dataServices.pdb
+C:\Users\Insha sadaf\source\repos\dataServices\obj\Debug\dataServices.csproj.AssemblyReference.cache
+C:\Users\Insha sadaf\source\repos\dataServices\obj\Debug\dataServices.csproj.CoreCompileInputs.cache
+C:\Users\Insha sadaf\source\repos\dataServices\obj\Debug\dataServices.dll
+C:\Users\Insha sadaf\source\repos\dataServices\obj\Debug\dataServices.pdb

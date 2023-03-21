@@ -1,0 +1,6 @@
+C:\Users\Insha sadaf\source\repos\ModelServices\obj\Debug\ModelServices.csproj.AssemblyReference.cache
+C:\Users\Insha sadaf\source\repos\ModelServices\obj\Debug\ModelServices.csproj.CoreCompileInputs.cache
+C:\Users\Insha sadaf\source\repos\ModelServices\bin\Debug\ModelServices.dll
+C:\Users\Insha sadaf\source\repos\ModelServices\bin\Debug\ModelServices.pdb
+C:\Users\Insha sadaf\source\repos\ModelServices\obj\Debug\ModelServices.dll
+C:\Users\Insha sadaf\source\repos\ModelServices\obj\Debug\ModelServices.pdb
