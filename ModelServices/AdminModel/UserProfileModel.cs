@@ -19,5 +19,11 @@ namespace ModelServices.AdminModel
         public string PHONENUMBER { get; set; }
         public string PROFICPATH { get; set; }
         public UserAddressModel LISTOFADDRESS { get; set; }
+        [Required(ErrorMessage = "Please Select Country Name")]
+        public List<CountryModel> countryModels { get; set; }
+        [Required(ErrorMessage = "Please Select State Name")]
+        public List<StateModel> stateModels { get; set; }
+        [Required(ErrorMessage = "Please Select City Name")]
+        public List<CityModel> cityModels { get; set; }
     }
 }
