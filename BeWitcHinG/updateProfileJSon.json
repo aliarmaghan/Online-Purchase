@@ -1,0 +1,74 @@
+{
+
+  {
+    "USERID": "11e41eb7-0a57-4f96-be2c-2e7f350f7b76",
+    "EMAIL": "admin@bewitching.com",
+    "USERNAME": "BeAdmin",
+    "PHONENUMBER": "7677197676",
+    "PROFICPATH": null,
+
+    "LISTOFADDRESS": {
+      "USERID": null,
+      "ADDRESS": "C/O IRSHAD ALAM ADV, MOHALLA-ISLAM TOLI, AURANGABAD BIHAR",
+      "LANDMARK": "near pandey pustakalya",
+      "COUNTRYID": 0,
+      "STATEID": 0,
+      "CITYID": 0,
+      "PINCODE": "824101"
+    }
+  },
+
+
+
+  {
+    "CITYID": 0,
+    "CITYNAME": "Patna",
+    "STATEID": 6,
+    "STATENAME": null,
+    "USERID": "11e41eb7-0a57-4f96-be2c-2e7f350f7b76",
+    "ISACTIVE": true,
+    "MODIFIEDBY": null,
+    "MODIFIEDDATE": null,
+    "stateModels": null
+  },
+  {
+    "ID": 0,
+    "GEN_TYPE": "Male",
+    "GEN_CODE": "M",
+    "MODIFIED_DATE": null,
+    "IS_ACTIVE": true,
+    "MODIFIED_BY": null,
+    "USERID": "11e41eb7-0a57-4f96-be2c-2e7f350f7b76"
+  }
+
+  {
+    "ID": 1,
+    "GEN_TYPE": "Male",
+    "GEN_CODE": "kya karoge jaan k",
+    "MODIFIED_DATE": null,
+    "IS_ACTIVE": true,
+    "MODIFIED_BY": null,
+    "USERID": "11e41eb7-0a57-4f96-be2c-2e7f350f7b76"
+  }
+  {
+    "USERID": "11e41eb7-0a57-4f96-be2c-2e7f350f7b76",
+    "EMAIL": "admin@bewitching.com",
+    "USERNAME": "BeAdmin",
+    "PHONENUMBER": "7677197676",
+    "PROFICPATH": null,
+
+    "LISTOFADDRESS": {
+      "ADDRESS": "C/O IRSHAD ALAM ADV, MOHALLA-ISLAM TOLI, AURANGABAD BIHAR",
+      "LANDMARK": "near Pandey Pustakalaya",
+      "COUNTRYID": 4,
+      "STATEID": 6,
+      "CITYID": 9,
+      "PINCODE": "824101",
+      "USERID": null
+    },
+    "countryModels": null,
+    "stateModels": null,
+    "cityModels": null
+  }
+
+}

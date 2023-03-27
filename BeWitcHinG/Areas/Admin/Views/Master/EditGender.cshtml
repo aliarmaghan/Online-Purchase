@@ -1,0 +1,49 @@
+﻿@using ModelServices.AdminModel
+@model GenderModel
+<input id="hdnMessage" type="hidden" value="@TempData["ResponseMessage"]" />
+<input id="hdnValue" type="hidden" value="@TempData["ResponseValue"]" />
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align:center;">Update Gender</h4>
+
+                @using (Html.BeginForm("AddGender", "Master", new { area = "Admin" }, FormMethod.Post, new { @class = "forms-sample", role = "form" }))
+                {
+
+                    @Html.HiddenFor(x => x.ID)
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Country Name</label>
+                            @Html.TextBoxFor(x => x.GEN_TYPE, new { @class = "form-control", })
+                            @Html.ValidationMessageFor(m => m.GEN_TYPE, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Code</label>
+                            @Html.TextBoxFor(x => x.GEN_CODE, new { @class = "form-control" })
+                        </div>
+
+                        <div class=" form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                @Html.CheckBoxFor(x => x.IS_ACTIVE, new { @class = "form-check-input", @type = "checkbox" })Is Active
+                            </label>
+                        </div>
+
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-gradient-primary me-2">Update</button>
+                    <a class="btn btn-light" href="@Url.Action("Gender","Master",new {area="Admin"})">Cancel</a>
+
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts
+{
+
+}
+

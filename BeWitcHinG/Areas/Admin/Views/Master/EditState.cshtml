@@ -1,0 +1,45 @@
+﻿@using ModelServices.AdminModel
+@model StateModel
+
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align:center;">Update State</h4>
+
+                @using (Html.BeginForm("AddState", "Master", new { area = "Admin" }, FormMethod.Post, new { @class = "forms-sample", role = "form" }))
+                {
+
+                    @Html.HiddenFor(x => x.STATEID)
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Country Name</label>
+                            @Html.DropDownListFor(x => x.COUNTRYID, new SelectList(Model.countryModels, "ID", "COUNTRY_NAME"), "Select Country", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                            @Html.ValidationMessageFor(m => m.COUNTRYID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State Name</label>
+                            @Html.TextBoxFor(x => x.STATENAME, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.STATENAME, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class=" form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                @Html.CheckBoxFor(x => x.ISACTIVE, new { @class = "form-check-input", @type = "checkbox" })Is Active
+                            </label>
+                        </div>
+
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                    <a class="btn btn-light" href="@Url.Action("State","Master",new {area="Admin"})">Cancel</a>
+
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>

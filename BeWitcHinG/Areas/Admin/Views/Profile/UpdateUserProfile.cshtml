@@ -1,0 +1,123 @@
+﻿@using ModelServices.AdminModel
+@model UserProfileModel
+
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align:center;">Update Profile</h4>
+                <br />
+                <input id="hdnMessage" type="hidden" value="@TempData["ResponseMessage"]" />
+                <input id="hdnValue" type="hidden" value="@TempData["ResponseValue"]" />
+
+                <br />
+                @using (Html.BeginForm("UpdateUserProfile", "Profile", new { area = "Admin" }, FormMethod.Post, new { @class = "forms-sample", role = "form" }))
+                {
+                    @Html.HiddenFor(x => x.USERID)
+
+                    <div class="row">
+                        <div class="col-md-6  form-group">
+                            <label>Email</label>
+                            @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Phone Number</label>
+                            @Html.TextBoxFor(x => x.PHONENUMBER, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PHONENUMBER, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="exampleInputPassword1"> UserName<span class="text-danger"> * </span></label>
+                            @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.USERNAME, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <div style="text-align:center">
+                                <h4>
+                                    Update Address
+                                </h4>
+                            </div>
+                            <div class="col-md-6  form-group">
+                                <label>ADDRESS</label>
+                                @Html.TextBoxFor(x => Model.LISTOFADDRESS.ADDRESS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.LISTOFADDRESS.ADDRESS, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>LANDMARK </label>
+                                @Html.TextBoxFor(x => Model.LISTOFADDRESS.LANDMARK, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.LISTOFADDRESS.LANDMARK, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label> PINCODE</label>
+                                @Html.TextBoxFor(x => Model.LISTOFADDRESS.PINCODE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.LISTOFADDRESS.PINCODE, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Country Name</label>
+                                @Html.DropDownListFor(x => x.LISTOFADDRESS.COUNTRYID, new SelectList(Model.countryModels, "ID", "COUNTRY_NAME"), "Select Country", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.LISTOFADDRESS.COUNTRYID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>City Name</label>
+                                @Html.DropDownListFor(x => x.LISTOFADDRESS.CITYID, new SelectList(Model.cityModels, "CITYID", "CITYNAME"), "Select City", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.LISTOFADDRESS.CITYID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State Name</label>
+                                @Html.DropDownListFor(x => x.LISTOFADDRESS.STATEID, new SelectList(Model.stateModels, "STATEID", "STATENAME"), "Select State", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.LISTOFADDRESS.STATEID, "", new { @class = "text-danger" })
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                    <a class="btn btn-light" href="@Url.Action("Index","Home",new {area="Admin"})"> Cancel </a>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+            const message = $('#hdnMessage').val();
+            const response = parseInt($('#hdnValue').val());
+            let heading = '', icon = ''
+
+            if (message != "" && message != undefined) {
+
+                if (response == 1) {
+                    heading = 'Success';
+                    icon = 'success';
+                }
+                else {
+                    heading = 'Error';
+                    icon = 'error';
+                }
+
+                $.toast({
+                    heading: heading,
+                    text: message,
+                    showHideTransition: 'slide',
+                    icon: icon,
+                    position: 'top-right',
+                })
+            }
+
+            //alert(message);
+            //alert(response);
+            //console.log("ready!");
+        });
+    </script>
+}
+
+
