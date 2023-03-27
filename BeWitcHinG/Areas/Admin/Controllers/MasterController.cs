@@ -25,6 +25,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         CitySvc citySvc = new CitySvc();
         MasterDataSvc masterData = new MasterDataSvc();
         GenderSvc genderSvc = new GenderSvc();
+        BrandSvc brandSvc = new BrandSvc(); 
         public MasterController()
         {
 
@@ -452,6 +453,18 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
         }
 
+
+        #endregion
+
+
+        #region Brand curd
+        [HttpGet]
+        public async Task<ActionResult> Brand(int? id)
+        {
+            await Task.Delay(0);
+            var model = await brandSvc.GetBrandList(id);
+            return View(model);
+        }
 
         #endregion
 

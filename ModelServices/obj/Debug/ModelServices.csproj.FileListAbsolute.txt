@@ -10,3 +10,9 @@ C:\Users\Insha sadaf\Downloads\BeWitching\ModelServices\obj\Debug\ModelServices.
 C:\Users\Insha sadaf\Downloads\BeWitching\ModelServices\obj\Debug\ModelServices.csproj.CoreCompileInputs.cache
 C:\Users\Insha sadaf\Downloads\BeWitching\ModelServices\obj\Debug\ModelServices.dll
 C:\Users\Insha sadaf\Downloads\BeWitching\ModelServices\obj\Debug\ModelServices.pdb
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\ModelServices\bin\Debug\ModelServices.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\ModelServices\bin\Debug\ModelServices.pdb
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\ModelServices\obj\Debug\ModelServices.csproj.AssemblyReference.cache
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\ModelServices\obj\Debug\ModelServices.csproj.CoreCompileInputs.cache
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\ModelServices\obj\Debug\ModelServices.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\ModelServices\obj\Debug\ModelServices.pdb

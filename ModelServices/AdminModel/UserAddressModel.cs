@@ -14,8 +14,11 @@ namespace ModelServices.AdminModel
         public string ADDRESS { get; set; }
         [Required(ErrorMessage = "Please enter your landmark")]
         public string LANDMARK { get; set; }
+        [Required(ErrorMessage = "Please Select Country Name")]
         public int COUNTRYID { get; set; }
+        [Required(ErrorMessage = "Please Select State Name")]
         public int STATEID { get; set; }
+        [Required(ErrorMessage = "Please Select City Name")]
         public int CITYID { get; set; }
         [Required(ErrorMessage = "Please enter your pincode")]
         [StringLength(6, MinimumLength = 3)]
