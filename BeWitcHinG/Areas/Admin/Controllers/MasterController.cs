@@ -461,9 +461,18 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Brand(int? id)
         {
+            BrandBaseModel brandBaseModel = new BrandBaseModel();
+
             await Task.Delay(0);
             var model = await brandSvc.GetBrandList(id);
-            return View(model);
+            brandBaseModel.brandList = model;
+            return View(brandBaseModel);
+        }
+        [HttpGet]
+        public async Task<ActionResult> AddBrand(int? id)
+        {
+            await Task.Delay(0);
+            return View();
         }
 
         #endregion

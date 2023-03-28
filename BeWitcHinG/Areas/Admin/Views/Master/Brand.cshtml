@@ -1,5 +1,5 @@
 ﻿@using ModelServices.AdminModel
-@model List<BrandModel>
+@model BrandBaseModel
 
 
 <input id="hdnMessage" type="hidden" value="@TempData["ResponseMessage"]" />
@@ -8,8 +8,9 @@
     <div class="col-lg-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <a style="margin-left:960px" class="btn btn-sm btn-inverse-primary" href="@Url.Action("AddGender","Master",new {area="Admin"})">Add<i class="mdi mdi-plus-box"></i></a>
-                <table class="table table-hover" id="tableCountry">
+
+                <a style="margin-left:960px" class="btn btn-sm btn-inverse-primary" id="btnAdd">Add<i class="mdi mdi-plus-box"></i></a>
+                <table class="table table-hover" id="tableBrand">
                     <thead>
                         <tr>
                             <th>Brand</th>
@@ -21,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.brandList)
                         {
                             <tr>
                                 <td>@item.BRAND_NAME </td>
@@ -44,6 +45,9 @@
         </div>
     </div>
 </div>
+
+
+@Html.Partial("~/Areas/Admin/Views/Shared/_AddUpdateBrand.cshtml", Model);
 
 @section Scripts
 {
@@ -73,9 +77,17 @@
             //alert(message);
             //alert(response);
             //console.log("ready!");
+
+
         });
 
-        var table = $('#tableCountry').DataTable();
+        var table = $('#tableBrand').DataTable();
+
+        $('#btnAdd').click(function () {
+
+            $('#addUpdateBrand').modal('show');
+        })
+
     </script>
 }
 
