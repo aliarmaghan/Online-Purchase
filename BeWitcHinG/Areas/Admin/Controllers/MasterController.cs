@@ -11,6 +11,7 @@ using ModelServices.AdminModel;
 using Newtonsoft.Json;
 using BusinessService;
 using BusinessService.Helper;
+using ModelServices;
 
 namespace BeWitcHinG.Areas.Admin.Controllers
 {
@@ -24,6 +25,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         StateSvc stateSvc = new StateSvc();
         CitySvc citySvc = new CitySvc();
         MasterDataSvc masterData = new MasterDataSvc();
+        CategorySvc categorySvc = new CategorySvc();
         GenderSvc genderSvc = new GenderSvc();
         BrandSvc brandSvc = new BrandSvc(); 
         public MasterController()
@@ -363,7 +365,20 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
         #endregion
 
+        #region Category
+        [HttpGet]
+        public async Task<ActionResult> Category(int? id)
+        {
+            CategoryBaseModel categoryBaseModel = new CategoryBaseModel();
 
+            await Task.Delay(0);
+            var model = await categorySvc.GetCategoryList(id);
+            categoryBaseModel.Categories = model;
+            return View(categoryBaseModel);
+        }
+
+
+        #endregion
 
 
         #region Gender curd

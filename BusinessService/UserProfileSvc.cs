@@ -40,7 +40,7 @@ namespace BusinessService
 
                 //var addressModel = genericList.GenerateGenericList<UserAddressModel>(ds.Tables[1]);
 
-                model.AddressModel = addressModel;
+                model.LISTOFADDRESS = addressModel;
 
                 return model;
             }

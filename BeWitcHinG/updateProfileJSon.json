@@ -70,5 +70,24 @@
     "stateModels": null,
     "cityModels": null
   }
+  {
+    "USERID": "7bf7c3c5-1970-4983-aee9-5899a5101a70",
+    "EMAIL": "admin@bewitching.com",
+    "USERNAME": "BeAdmin",
+    "PHONENUMBER": "7677197676",
+    "PROFICPATH": null,
+    "AddressModel": {
+      "USERID": null,
+      "ADDRESS": "C/O IRSHAD ALAM ADV, MOHALLA-ISLAM TOLI, AURANGABAD BIHAR",
+      "LANDMARK": "Near Pandey Pustakalaya",
+      "COUNTRYID": 3,
+      "STATEID": 1,
+      "CITYID": 2,
+      "PINCODE": "824101"
+    },
+    "countryModels": null,
+    "stateModels": null,
+    "cityModels": null
+  }
 
 }

@@ -12,6 +12,6 @@ namespace ModelServices.AdminModel
         public string BRAND_NAME { get; set; }
         public string BRAND_CODE { get; set; }
         public bool IS_ACTIVE { get; set; }
-        public List <BrandModel> brandList { get; set; }
+        public List<BrandModel> brandList { get; set; }
     }
 }

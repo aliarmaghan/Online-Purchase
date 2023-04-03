@@ -197,6 +197,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Toaster.css" />
+    <Content Include="Content\custom\Category.js" />
     <Content Include="Content\images\client-images\shop.png" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\dashboard\circle.png" />
@@ -483,6 +484,8 @@
     <Content Include="Areas\Admin\Views\Master\EditGender.cshtml" />
     <Content Include="Areas\Admin\Views\Master\Brand.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AddUpdateBrand.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\Category.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AddUpdateCategory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

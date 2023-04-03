@@ -18,7 +18,7 @@ namespace ModelServices.AdminModel
         [RegularExpression("([0-9]+)")]
         public string PHONENUMBER { get; set; }
         public string PROFICPATH { get; set; }
-        public UserAddressModel AddressModel { get; set; }
+        public UserAddressModel LISTOFADDRESS { get; set; }
         
         public List<CountryModel> countryModels { get; set; }
        

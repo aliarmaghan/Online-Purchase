@@ -41,34 +41,35 @@
                             </div>
                             <div class="col-md-6  form-group">
                                 <label>ADDRESS</label>
-                                @Html.TextBoxFor(x => Model.AddressModel.ADDRESS, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => Model.AddressModel.ADDRESS, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(x => Model.LISTOFADDRESS.ADDRESS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.LISTOFADDRESS.ADDRESS, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>LANDMARK </label>
-                                @Html.TextBoxFor(x => Model.AddressModel.LANDMARK, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => Model.AddressModel.LANDMARK, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(x => Model.LISTOFADDRESS.LANDMARK, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.LISTOFADDRESS.LANDMARK, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 form-group">
                                 <label> PINCODE</label>
-                                @Html.TextBoxFor(x => Model.AddressModel.PINCODE, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => Model.AddressModel.PINCODE, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(x => Model.LISTOFADDRESS.PINCODE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.LISTOFADDRESS.PINCODE, "", new { @class = "text-danger" })
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <label>Country Name</label>
-                                @Html.DropDownListFor(x => x.AddressModel.COUNTRYID, new SelectList(Model.countryModels, "ID", "COUNTRY_NAME"), "Select Country", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
-                                @Html.ValidationMessageFor(m => m.AddressModel.COUNTRYID, "", new { @class = "text-danger" })
-                            </div>
+
                             <div class="col-md-6 form-group">
                                 <label>City Name</label>
-                                @Html.DropDownListFor(x => x.AddressModel.CITYID, new SelectList(Model.cityModels, "CITYID", "CITYNAME"), "Select City", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
-                                @Html.ValidationMessageFor(m => m.AddressModel.CITYID, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(x => x.LISTOFADDRESS.CITYID, new SelectList(Model.cityModels, "CITYID", "CITYNAME"), "Select City", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.LISTOFADDRESS.CITYID, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>State Name</label>
-                                @Html.DropDownListFor(x => x.AddressModel.STATEID, new SelectList(Model.stateModels, "STATEID", "STATENAME"), "Select State", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
-                                @Html.ValidationMessageFor(m => m.AddressModel.STATEID, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(x => x.LISTOFADDRESS.STATEID, new SelectList(Model.stateModels, "STATEID", "STATENAME"), "Select State", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.LISTOFADDRESS.STATEID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Country Name</label>
+                                @Html.DropDownListFor(x => x.LISTOFADDRESS.COUNTRYID, new SelectList(Model.countryModels, "ID", "COUNTRY_NAME"), "Select Country", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.LISTOFADDRESS.COUNTRYID, "", new { @class = "text-danger" })
                             </div>
 
 
