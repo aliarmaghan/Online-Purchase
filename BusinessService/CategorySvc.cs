@@ -45,5 +45,30 @@ namespace BusinessService
                 throw;
             }
         }
+        public async Task<bool> AddCategory(string jsonData)
+        {
+            await Task.Delay(0);
+            DataTable dt = new DataTable();
+            try
+            {
+                string StoreProcedureName = "PROC_ADD_CATEGORY";
+                SqlParameter[] prms = new SqlParameter[]
+                   {
+                    _sqlFunctionSvc.CreateParameter("@CategJson",SqlDbType.NVarChar,-1,ParameterDirection.Input,jsonData),
+                    _sqlFunctionSvc.CreateParameter("@MESSAGE",SqlDbType.VarChar,-1,ParameterDirection.Output,DBNull.Value),
+                    _sqlFunctionSvc.CreateParameter("@RESPONSE",SqlDbType.Bit,1,ParameterDirection.Output,DBNull.Value),
+
+                   };
+                dt = _sqlFunctionSvc.ExecProcDataTable(StoreProcedureName, ref prms);
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
     }
 }

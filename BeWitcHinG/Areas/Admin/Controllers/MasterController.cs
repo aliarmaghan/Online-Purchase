@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using BusinessService;
 using BusinessService.Helper;
 using ModelServices;
+using System.Net;
 
 namespace BeWitcHinG.Areas.Admin.Controllers
 {
@@ -377,6 +378,59 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             return View(categoryBaseModel);
         }
 
+        // ajax call
+        [HttpPost]
+        public async Task<ActionResult> AddCategory(CategoryBaseModel model)
+        {
+            Response _response = new Response();
+
+            string userId = await GetLoggedInUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                model.USERID = user.Id;
+
+                var jsonString = JsonConvert.SerializeObject(model);
+
+                bool isTrue = await categorySvc.AddCategory(jsonString);
+
+                if (isTrue)
+                {
+                    _response.Message = "Category has been Created Succesfully!";
+                    _response.StatusCode = HttpStatusCode.OK;
+                }
+                else
+                {
+                    _response.Message = "Category could not created! Please contact to admin";
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                }
+            }
+            else
+            {
+                _response.Message = "Your are not authorize to access or manipulate data";
+                _response.StatusCode = HttpStatusCode.Unauthorized;
+            }
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+
+        // ajax call
+        [HttpGet]
+        public async Task<ActionResult> GetCategoryList(int? id = 0)
+        {
+
+            Response _response = new Response();
+            var model = await categorySvc.GetCategoryList(id);
+
+            _response.Message = "Fetched Successfully.";
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = JsonConvert.SerializeObject(model);
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
 
         #endregion
 
