@@ -37,3 +37,13 @@ C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\obj\Debug\
 C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\obj\Debug\BusinessService.csproj.CopyComplete
 C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\obj\Debug\BusinessService.dll
 C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\obj\Debug\BusinessService.pdb
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.Mvc.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.WebPages.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.Razor.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.Mvc.xml
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.WebPages.xml
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.Razor.xml
+C:\Users\Insha sadaf\Documents\GitHub\Online-Purchase\BusinessService\bin\Debug\System.Web.WebPages.Deployment.xml

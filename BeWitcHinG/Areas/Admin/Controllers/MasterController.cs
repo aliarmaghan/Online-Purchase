@@ -380,6 +380,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
         // ajax call
         [HttpPost]
+        [AjaxOnly]
         public async Task<ActionResult> AddCategory(CategoryBaseModel model)
         {
             Response _response = new Response();
@@ -397,8 +398,17 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
                 if (isTrue)
                 {
-                    _response.Message = "Category has been Created Succesfully!";
-                    _response.StatusCode = HttpStatusCode.OK;
+                    if(model.CATEGORY_ID > 0)
+                    {
+                        _response.Message = "Category has been Updated Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+                    else
+                    {
+                        _response.Message = "Category has been Created Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+                    
                 }
                 else
                 {
@@ -418,6 +428,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
         // ajax call
         [HttpGet]
+        [AjaxOnly]
         public async Task<ActionResult> GetCategoryList(int? id = 0)
         {
 
@@ -430,6 +441,27 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
             return Json(_response, JsonRequestBehavior.AllowGet);
 
+        }
+        [AjaxOnly]
+        [HttpPost]
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            //await Task.Delay(0);
+            Response _response = new Response();
+
+            bool result = await categorySvc.DeleteCategory(id);
+
+            if (result)
+            {
+                _response.Message = "Category has been Deleted Succesfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            else
+            {
+                _response.Message = "Category could not delete. Please contact to support team";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

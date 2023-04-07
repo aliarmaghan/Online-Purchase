@@ -8,37 +8,40 @@
         <div class="card">
             <div class="card-body">
                 <a style="margin-left:960px" class="btn btn-sm btn-inverse-primary" id="btnAdd">Add<i class="mdi mdi-plus-box"></i></a>
-                <table class="table table-hover" id="tableBrand">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Code</th>
-                            <th>Created Date</th>
-                            <th>Created By</th>
-                            <th>Is Active</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody  id="tblBody">
-                        @foreach (var item in Model.Categories)
-                        {
+                <div id="divCateg">
+                    @*<table class="table table-hover" id="tableBrand">
+                        <thead>
                             <tr>
-                                <td>@item.CATEGORY_NAME </td>
-                                <td>@item.CATEGORY_CODE</td>
-                                <td>@item.MODIFIED_DATE</td>
-                                <td>@item.MODIFIED_BY</td>
-                                <td>@item.IS_ACTIVE</td>
-                                <td>
-                                    <a href="@Url.Action("EditGender","Master",new {area="Admin",id=item.CATEGORY_ID})"><i class="mdi mdi-grease-pencil text-primary"></i></a>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <a href="@Url.Action("DeleteGender","Master",new {area="Admin",id=item.CATEGORY_ID})"><i class="mdi mdi-delete text-danger"></i></a>
-                                </td>
+                                <th>Category</th>
+                                <th>Code</th>
+                                <th>Created Date</th>
+                                <th>Created By</th>
+                                <th>Is Active</th>
+                                <th>Action</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <tr>
+                                    <td>@item.CATEGORY_NAME </td>
+                                    <td>@item.CATEGORY_CODE</td>
+                                    <td>@item.MODIFIED_DATE</td>
+                                    <td>@item.MODIFIED_BY</td>
+                                    <td>@item.IS_ACTIVE</td>
+                                    <td>
+                                        <a href="@Url.Action("EditGender","Master",new {area="Admin",id=item.CATEGORY_ID})"><i class="mdi mdi-grease-pencil text-primary"></i></a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a href="@Url.Action("DeleteGender","Master",new {area="Admin",id=item.CATEGORY_ID})"><i class="mdi mdi-delete text-danger"></i></a>
+                                    </td>
+                                </tr>
 
-                        }
+                            }
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>*@
+                </div>
+
             </div>
         </div>
     </div>

@@ -70,5 +70,25 @@ namespace BusinessService
                 return false;
             }
         }
+        public async Task<bool> DeleteCategory(int id)
+        {
+
+            try
+            {
+                await Task.Delay(0);
+                string query = "Delete from Category_MT where CATEGORY_ID =" + id + "";
+
+
+                string result = _sqlFunctionSvc.ExecStrSingleValue(query);
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
