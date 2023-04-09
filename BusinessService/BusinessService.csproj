@@ -60,6 +60,7 @@
     <Compile Include="Helper\MasterDataSvc.cs" />
     <Compile Include="Helper\Response.cs" />
     <Compile Include="IUserProfileSvc.cs" />
+    <Compile Include="LoginDetailSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateSvc.cs" />
     <Compile Include="UserProfileSvc.cs" />

@@ -50,10 +50,12 @@
     <Compile Include="AdminModel\ChangePasswordModel.cs" />
     <Compile Include="AdminModel\CityModel.cs" />
     <Compile Include="AdminModel\CountryModel.cs" />
+    <Compile Include="AdminModel\GenderBaseModel.cs" />
     <Compile Include="AdminModel\GenderModel.cs" />
     <Compile Include="AdminModel\StateModel.cs" />
     <Compile Include="AdminModel\UserAddressModel.cs" />
     <Compile Include="AdminModel\UserProfileModel.cs" />
+    <Compile Include="LoginDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAuthorizeModel.cs" />
   </ItemGroup>

@@ -1,0 +1,47 @@
+﻿@using ModelServices.AdminModel
+@model GenderBaseModel
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>*@
+
+<!-- Modal -->
+<div class="modal fade" id="UpdateGender" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <form method="post" id="formGenderUpdate">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Gender</h5>
+                    <button type="button" class="btn-close UbtnClose" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hdnGenId" value="" />
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Category</label>
+                            @Html.TextBoxFor(x => x.GEN_TYPE, new { @class = "form-control" , @id="Updt_GEN_TYPE"})
+                            @Html.ValidationMessageFor(m => m.GEN_TYPE, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Code</label>
+                            @Html.TextBoxFor(x => x.GEN_CODE, new { @class = "form-control" ,@id="Updt_GEN_CODE"})
+                            @Html.ValidationMessageFor(m => m.GEN_CODE, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class=" form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                @Html.CheckBoxFor(x => x.IS_ACTIVE, new { @class = "form-check-input", @type = "checkbox" , @id= "Updt_IS_ACTIVE" })Is Active
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary UbtnClose">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary" id="btnUpdateGen">Update</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

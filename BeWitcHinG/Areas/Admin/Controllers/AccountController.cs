@@ -15,6 +15,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using BusinessService;
 using Newtonsoft.Json;
 using bewitching.AuthenticationSvc;
+using ModelServices;
+using BusinessService.Helper;
+using System.Data;
 
 namespace BeWitcHinG.Areas.Admin.Controllers
 {
@@ -25,6 +28,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         UserProfileSvc _userProfileSvc = new UserProfileSvc();
         AuthSvc authSvc = new AuthSvc();
         CookiesSvc cookie = new CookiesSvc();
+        ConverDataTableToGenericObject genericObject = new ConverDataTableToGenericObject();
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -83,8 +87,25 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
+                        
+
                         const int expireTime = 60;
                         cookie.SetCookie("user_id", result.UserId, expireTime);
+                        var Id = result.UserId;
+                        string UserId = authSvc.DecryptToken(Id);
+                        
+                        LoginDetailSvc loginDetailSvc = new LoginDetailSvc();
+                        var details = loginDetailSvc.GetLoginDetails(UserId);
+
+                        
+                        if (details != null)
+                        {
+                           
+                            Session["ProFicPath"] = details.Result.PROFILE_PIC_PATH;
+                            Session["UserName"] = details.Result.UserName;
+                            Session["Role"] = details.Result.Role;
+                        }
+
 
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }

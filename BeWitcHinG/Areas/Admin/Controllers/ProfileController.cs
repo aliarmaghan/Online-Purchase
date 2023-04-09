@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -148,9 +149,66 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             var Cmodel = await masterDataSvc.CountryList();
             var Smodel = await masterDataSvc.StateList();
             var CTmodel = await masterDataSvc.CityList();
+            model.countryModels = Cmodel;
+            model.cityModels = CTmodel;
+            model.stateModels = Smodel;
 
             if (ModelState.IsValid)
             {
+                bool isImageType = false;
+
+                // CREATING STRING ARRAY FOR CHECKING IMAGE
+                string[] imagesCheck = { ".png", ".jpg", ".jpeg" };
+
+                // GETTING FILE DATA FROM REQUESTED POST
+                HttpPostedFileBase getFile = Request.Files["ImageData"];
+
+                if (getFile != null && getFile.ContentLength > 0)
+                {
+                    // GETTING FILE EXTENSTION
+                    string extension = Path.GetExtension(getFile.FileName);
+
+                    // CHECKING FILE EXTENSION
+                    for (int i = 0; i < imagesCheck.Length; i++)
+                    {
+                        if (extension.ToLower() == imagesCheck[i])
+                        {
+                            isImageType = true;
+                            break;
+                        }
+                    }
+
+                    if (!isImageType)
+                    {
+
+                        TempData["ResponseMessage"] = "Please upload file in image format {png, jpg, jpeg}!";
+                        TempData["ResponseValue"] = 0;
+
+                        return View(model);
+                    }
+
+                    // CREATING FOLDER OR DIRECTORY IN SOLUTION
+                    string imagePath = "/Image/profile/";
+
+                    bool exists = Directory.Exists(Server.MapPath(imagePath));
+
+                    if (!exists)
+                        Directory.CreateDirectory(Server.MapPath(imagePath));
+
+                    // GIVING NEW NAME TO FILE
+                    string fileNewName = "profile" + "_" + DateTime.Now.ToString("ddMMMyyyyhhmmss") + extension;
+                    // GETTING SERVER PATH TO SAVE
+                    string pathToSave = Path.Combine(Server.MapPath(imagePath), fileNewName);
+                    // GETTING PATH TO SAVE IN DATABASE
+
+                    model.PROFICPATH = imagePath + fileNewName + "";
+
+                    getFile.SaveAs(pathToSave);
+
+                }
+
+
+
                 string userId = await GetLoggedInUserName();
                 var user = await UserManager.FindByIdAsync(userId);
                 if (user == null)
@@ -171,9 +229,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
                     TempData["ResponseValue"] = 0;
                 }
             }
-            model.countryModels = Cmodel;
-            model.cityModels = CTmodel;
-            model.stateModels = Smodel;
+            
             return View(model);
         }
         private async Task<string> GetLoggedInUserName()

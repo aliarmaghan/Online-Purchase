@@ -12,7 +12,7 @@
                 <input id="hdnValue" type="hidden" value="@TempData["ResponseValue"]" />
 
                 <br />
-                @using (Html.BeginForm("UpdateUserProfile", "Profile", new { area = "Admin" }, FormMethod.Post, new { @class = "forms-sample", role = "form" }))
+                @using (Html.BeginForm("UpdateUserProfile", "Profile", new { area = "Admin" }, FormMethod.Post, new { @class = "forms-sample", role = "form", enctype = "multipart/form-data" }))
                 {
                     @Html.HiddenFor(x => x.USERID)
 
@@ -32,7 +32,12 @@
                             @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control", @readonly = "readonly" })
                             @Html.ValidationMessageFor(m => m.USERNAME, "", new { @class = "text-danger" })
                         </div>
+                        <div class="col-md-6 form-group">
 
+                            <label>Profile Pic</label>
+                            <img src="@Model.PROFICPATH" style="width:50px" />
+                            <input type="file" name="ImageData" id="ImageData" class="form-control" />
+                        </div>
                         <div class="row">
                             <div style="text-align:center">
                                 <h4>

@@ -2,7 +2,7 @@
 $(function () {
     //click event opening modal popup
     $('#btnAdd').click(function () {
-        $("#roleError").text("");
+        /*$("#roleError").text("");*/
 
         $('#exampleModalLabel').text('');
         $('#exampleModalLabel').text('Add Category');

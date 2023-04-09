@@ -40,5 +40,10 @@ namespace BusinessService.Helper
                 }
             }
         }
+
+        internal object CreateGenericObject<T>(DataTable dt)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -28,7 +28,8 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         MasterDataSvc masterData = new MasterDataSvc();
         CategorySvc categorySvc = new CategorySvc();
         GenderSvc genderSvc = new GenderSvc();
-        BrandSvc brandSvc = new BrandSvc(); 
+        BrandSvc brandSvc = new BrandSvc();
+        Response _response = new Response();
         public MasterController()
         {
 
@@ -471,88 +472,107 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Gender(int ? id)
         {
+            GenderBaseModel genderBaseModel = new GenderBaseModel();
             await Task.Delay(0);
             var model = await genderSvc.GetGenderList(id);
-            return View(model);
+            genderBaseModel.Genders = model;
+            return View(genderBaseModel);
         }
-        [HttpGet]
-        public async Task<ActionResult> AddGender(int ? id)
-        {
-            await Task.Delay(0);
-            return View();
-        }
+    
+        // ajax call
         [HttpPost]
+        [AjaxOnly]
         public async Task<ActionResult> AddGender(GenderModel model)
         {
+            
             ModelState.Remove("ID");
 
-            await Task.Delay(0);
-            if (ModelState.IsValid)
+            string userId = await GetLoggedInUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user != null)
             {
-                string userId = await GetLoggedInUserId();
-                var user = await UserManager.FindByIdAsync(userId);
-                if (user == null)
-                {
-                    return RedirectToAction("AccessDenied", "Account", new { area = "Admin" });
-                }
                 model.USERID = user.Id;
-                var jsonGender = JsonConvert.SerializeObject(model);
 
-                bool result = await genderSvc.AddGender(jsonGender);
+                var jsonString = JsonConvert.SerializeObject(model);
 
-                if (result)
+                bool isTrue = await genderSvc.AddGender(jsonString);
+
+                if (isTrue)
                 {
                     if (model.ID > 0)
                     {
-                        TempData["ResponseMessage"] = "Gender has been Updated Succesfully!";
-                        TempData["ResponseValue"] = 1;
+                        _response.Message = "Gender has been Updated Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
                     }
                     else
                     {
-                        TempData["ResponseMessage"] = "Gender has been Created Succesfully!";
-                        TempData["ResponseValue"] = 1;
+                        _response.Message = "Gender has been Created Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
                     }
-                    return RedirectToAction("Gender", "Master", new { area = "Admin" });
+
                 }
                 else
                 {
-                    TempData["ResponseMessage"] = "Gender could not Created. Please contact to support team";
-                    TempData["ResponseValue"] = 0;
+                    _response.Message = "Gender could not created! Please contact to admin";
+                    _response.StatusCode = HttpStatusCode.BadRequest;
                 }
-
-            }
-
-            return View(model);
-
-        }
-        public async Task<ActionResult> EditGender(int id)
-        {
-            var model = await genderSvc.GetGenderList(id);
-            return View(model.FirstOrDefault());
-
-        }
-        public async Task<ActionResult> DeleteGender(int id)
-        {
-            //await Task.Delay(0);
-
-            bool result = await genderSvc.DeleteGender(id);
-
-            if (result)
-            {
-                TempData["ResponseMessage"] = "Gender has been Deleted Succesfully!";
-                TempData["ResponseValue"] = 1;
-
-                return RedirectToAction("Gender", "Master", new { area = "Admin" });
             }
             else
             {
-                TempData["ResponseMessage"] = "Gender could not delete. Please contact to support team";
-                TempData["ResponseValue"] = 0;
-
-                return RedirectToAction("Gender", "Master", new { area = "Admin" });
+                _response.Message = "Your are not authorize to access or manipulate data";
+                _response.StatusCode = HttpStatusCode.Unauthorized;
             }
 
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
         }
+
+        // ajax call
+        [HttpGet]
+        [AjaxOnly]
+        public async Task<ActionResult> GetGenderList(int? id = 0)
+        {
+
+            var model = await genderSvc.GetGenderList(id);
+
+            _response.Message = "Fetched Successfully.";
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = JsonConvert.SerializeObject(model);
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        //public async Task<ActionResult> EditGender(int id)
+        //{
+        //    var model = await genderSvc.GetGenderList(id);
+        //    return View(model.FirstOrDefault());
+
+        //}
+        //public async Task<ActionResult> DeleteGender(int id)
+        //{
+        //    //await Task.Delay(0);
+
+        //    bool result = await genderSvc.DeleteGender(id);
+
+        //    if (result)
+        //    {
+        //        TempData["ResponseMessage"] = "Gender has been Deleted Succesfully!";
+        //        TempData["ResponseValue"] = 1;
+
+        //        return RedirectToAction("Gender", "Master", new { area = "Admin" });
+        //    }
+        //    else
+        //    {
+        //        TempData["ResponseMessage"] = "Gender could not delete. Please contact to support team";
+        //        TempData["ResponseValue"] = 0;
+
+        //        return RedirectToAction("Gender", "Master", new { area = "Admin" });
+        //    }
+
+        //}
 
 
         #endregion
@@ -579,7 +599,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         #endregion
 
 
-        private async Task<string> GetLoggedInUserId()
+        public async Task<string> GetLoggedInUserId()
         {
             await Task.Delay(0);
             var key = cookie.GetCookiesValue("user_id");
