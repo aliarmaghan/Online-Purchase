@@ -46,14 +46,14 @@
                                 <span class="availability-status online"></span>
                             </div>
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">@HttpContext.Current.Session["UserName"]</p>
+                                <p class="font-weight-bold mb-2" style="color:#100f0f">@HttpContext.Current.Session["UserName"]</p>
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="@Url.Action("ChangePassword","Profile", new { area = "Admin" })">
                                 <i class="mdi mdi-account-key me-2  text-danger"></i> Change Password
                             </a>
-                            <a class="dropdown-item" href="@Url.Action("UpdateUserProfile","Profile", new { area = "Admin" })">
+                            <a class="dropdown-item" href="@Url.Action("UpdateUserProfile","Profile", new { area = "Admin"  })">
                                 <i class="mdi mdi-account-convert me-2  text-primary"></i> Update Profile
                             </a>
                             <a class="dropdown-item" href="#">

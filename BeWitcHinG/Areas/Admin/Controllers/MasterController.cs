@@ -543,6 +543,29 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             return Json(_response, JsonRequestBehavior.AllowGet);
 
         }
+        [AjaxOnly]
+        [HttpPost]
+        public async Task<ActionResult> DeleteGender(int id)
+        {
+            //await Task.Delay(0);
+            Response _response = new Response();
+
+            bool result = await genderSvc.DeleteGender(id);
+
+            if (result)
+            {
+                _response.Message = "Gender has been Deleted Succesfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            else
+            {
+                _response.Message = "Gender could not delete. Please contact to support team";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
         //public async Task<ActionResult> EditGender(int id)

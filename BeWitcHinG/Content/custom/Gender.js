@@ -70,7 +70,11 @@ $(function () {
             $('#tableGender').DataTable();
             console.log(obj);
             addGender(obj);
+            resetForm();
+            $('#UpdateGender').modal('hide');
         }
+        resetForm();
+        $('#UpdateGender').modal('hide');
     });
 
     // close event
@@ -78,6 +82,7 @@ $(function () {
         resetForm();
         $('#AddUpdateGender').modal('hide');
     });
+
 
     getGenderData(0);
     $('#tableGender').DataTable();
@@ -259,10 +264,20 @@ function bindTable(data) {
         // CLICK EVENT FOR EDIT
     $('.btnEdit').click(function (e) {
         debugger
-        alert(1);
         e.preventDefault();
         const genderId = parseInt(e.currentTarget.dataset.genid);
         geteditdata(genderId);
+    });
+
+    // on click delete event
+    $('.btnDelete').click(function (e) {
+        e.preventDefault();
+        const genderId = parseInt(e.currentTarget.dataset.genid);
+        deleteGender(genderId);
+
+        setTimeout(function () {
+            getGenderData(0);
+        }, 500);
     });
 
 }
@@ -309,6 +324,46 @@ function geteditdata(id) {
     $('.UbtnClose').click(function () {
         resetForm();
         $('#UpdateGender').modal('hide');
+    });
+
+}
+
+
+
+
+
+//  Gender Delete Function
+function deleteGender(id) {
+    debugger
+    $.ajax({
+        type: 'POST',
+        url: "/admin/master/DeleteGender?id=" + id + "",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            //ressting the form
+            resetForm();
+
+            $.toast({
+                heading: "Warning",
+                text: result.Message,
+                showHideTransition: 'slide',
+                icon: "warning",
+                position: 'top-right',
+            });
+
+
+        },
+        error: function () {
+            $.toast({
+                heading: "Error",
+                text: "Error : Request could not be processed. Try again Later",
+                showHideTransition: 'slide',
+                icon: "error",
+                position: 'top-right',
+            });
+
+        }
     });
 
 }
