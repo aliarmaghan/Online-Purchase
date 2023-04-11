@@ -30,6 +30,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         GenderSvc genderSvc = new GenderSvc();
         BrandSvc brandSvc = new BrandSvc();
         Response _response = new Response();
+        SizeMTSvc sizemTSvc = new SizeMTSvc();
         public MasterController()
         {
 
@@ -618,6 +619,96 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             await Task.Delay(0);
             return View();
         }
+
+        #endregion
+
+
+
+        #region Size_MT
+
+        [HttpGet]
+        public async Task<ActionResult> Size_MT(int? id)
+        {
+            SizeMTBaseModel sizeMTBase = new SizeMTBaseModel();
+
+            await Task.Delay(0);
+            var model = await sizemTSvc.GetSizeMTList(id);
+            sizeMTBase.sizeMTModels = model;
+            return View(sizeMTBase);
+        }
+
+        // ajax call
+        [HttpPost]
+        [AjaxOnly]
+        public async Task<ActionResult> AddSizeMT(SizeMTBaseModel model)
+        {
+            Response _response = new Response();
+
+            string userId = await GetLoggedInUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                model.USERID = user.Id;
+
+                var jsonString = JsonConvert.SerializeObject(model);
+
+                bool isTrue = await sizemTSvc.AddSizeMT(jsonString);
+
+                if (isTrue)
+                {
+                    if (model.Size_Id > 0)
+                    {
+                        _response.Message = "Size has been Updated Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+                    else
+                    {
+                        _response.Message = "SIze has been Created Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+
+                }
+                else
+                {
+                    _response.Message = "Size could not created! Please contact to admin";
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                }
+            }
+            else
+            {
+                _response.Message = "Your are not authorize to access or manipulate data";
+                _response.StatusCode = HttpStatusCode.Unauthorized;
+            }
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+        // ajax call
+        [HttpGet]
+        [AjaxOnly]
+        public async Task<ActionResult> GetSizeMTList(int? id = 0)
+        {
+
+            Response _response = new Response();
+            var model = await sizemTSvc.GetSizeMTList(id);
+
+            _response.Message = "Fetched Successfully.";
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = JsonConvert.SerializeObject(model);
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+
+
+
+
+
 
         #endregion
 

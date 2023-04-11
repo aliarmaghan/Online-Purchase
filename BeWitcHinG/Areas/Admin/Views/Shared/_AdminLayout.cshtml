@@ -196,6 +196,19 @@
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("Category", "Master", new { area = "Admin" })">Category</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("Gender", "Master", new { area = "Admin" })">Gender</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("Brand", "Master", new { area = "Admin" })">Brand</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="collapse" href="#l-basic" aria-expanded="false" aria-controls="l-basic">
+                                        <span class="menu-title">Size</span>
+                                        <i class="menu-arrow"></i>
+                                    </a>
+                                    <div class="collapse" id="l-basic">
+                                        <ul class="nav flex-column sub-menu">
+                                            <li class="nav-item"> <a class="nav-link" href="@Url.Action("Size_MT", "Master", new { area = "Admin" })">Size_MT</a></li>
+                                            <li class="nav-item"> <a class="nav-link" href="@Url.Action("Size_DT", "Master", new { area = "Admin" })">Size_DT</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+
                             </ul>
                         </div>
                     </li>
@@ -219,15 +232,15 @@
     @*@Scripts.Render("~/bundles/bootstrap")*@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @*<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
     <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
-    <script src="~/Content/js/off-canvas.js"></script>
+    @*<script src="~/Content/js/off-canvas.js"></script>*@
     <script src="~/Content/js/hoverable-collapse.js"></script>
-    <script src="~/Content/js/misc.js"></script>>
-    <script src="~/Content/vendors/chart.js/Chart.min.js"></script>
+    @*<script src="~/Content/js/misc.js"></script>>*@
+    @*<script src="~/Content/vendors/chart.js/Chart.min.js"></script>*@
     <script src="~Content/js/dashboard.js"></script>
     <script src="~/Content/js/jquery.cookie.js"></script>
-    <script src="~Content/js/todolist.js"></script>
+   @* <script src="~Content/js/todolist.js"></script>*@
     <script src="~/Content/js/Toaster.js"></script>
     <script src="~/Content/jquery.dataTables.js"></script>
     @RenderSection("scripts", required: false)
