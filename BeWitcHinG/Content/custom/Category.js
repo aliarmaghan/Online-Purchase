@@ -197,24 +197,21 @@ function getCategoryData(id) {
 //bind table
 function bindTable(data) {
     debugger;
+    let dynamicString = '';
+    dynamicString += '<table class="table table-hover" id="tableCategory">';
+    dynamicString += '<thead>';
+    dynamicString += '<tr>';
+    dynamicString += '<th>Category</th>';
+    dynamicString += '<th>Code</th>';
+    dynamicString += '<th>Created Date</th>';
+    dynamicString += '<th>Created By</th>';
+    dynamicString += '<th>Is Active</th>';
+    dynamicString += '<th>Action</th>';
+    dynamicString += '</tr>';
+    dynamicString += '</thead>';
+    dynamicString += '<tbody>';
     if (data.length > 0) {
-        let dynamicString = '';
-
-        dynamicString += '<table class="table table-hover" id="tableCategory">';
-        dynamicString += '<thead>';
-        dynamicString += '<tr>';
-        dynamicString += '<th>Category</th>';
-        dynamicString += '<th>Code</th>';
-        dynamicString += '<th>Created Date</th>';
-        dynamicString += '<th>Created By</th>';
-        dynamicString += '<th>Is Active</th>';
-        dynamicString += '<th>Action</th>';
-        dynamicString += '</tr>';
-        dynamicString += '</thead>';
-
-        dynamicString += '<tbody>';
         $.each(data, function (key, val) {
-
             dynamicString += '<tr>';
             dynamicString += '<td>' + val.CATEGORY_NAME + '</td>';
             dynamicString += '<td>' + val.CATEGORY_CODE + '</td>';
@@ -227,36 +224,35 @@ function bindTable(data) {
             dynamicString += '</td >';
             dynamicString += '</tr>';
         });
-        dynamicString += '</tbody >';
-        dynamicString += '</table>';
-        $('#divCateg').html("");
-        $('#divCateg').html(dynamicString);
-
-
-        $('#tableCategory').DataTable();
-
-        // CLICK EVENT FOR EDIT
-        $('.btnEdit').click(function (e) {
-            e.preventDefault();
-            const categoryId = parseInt(e.currentTarget.dataset.categid);
-            geteditdata(categoryId);
-
-        });
-
-        //CLICK EVENT FOR DELETE
-        $('.btnDelete').click(function (e) {
-            e.preventDefault();
-            const categoryId = parseInt(e.currentTarget.dataset.categid);
-            deleteCateg(categoryId)
-
-            setTimeout(function () {
-
-                getCategoryData(0);
-
-            }, 500);
-        });
-        
     }
+    dynamicString += '</tbody >';
+    dynamicString += '</table>';
+    $('#divCateg').html("");
+    $('#divCateg').html(dynamicString);
+
+
+    $('#tableCategory').DataTable();
+
+    // CLICK EVENT FOR EDIT
+    $('.btnEdit').click(function (e) {
+        e.preventDefault();
+        const categoryId = parseInt(e.currentTarget.dataset.categid);
+        geteditdata(categoryId);
+
+    });
+
+    //CLICK EVENT FOR DELETE
+    $('.btnDelete').click(function (e) {
+        e.preventDefault();
+        const categoryId = parseInt(e.currentTarget.dataset.categid);
+        deleteCateg(categoryId)
+
+        setTimeout(function () {
+
+            getCategoryData(0);
+
+        }, 500);
+    });
 
 }
 

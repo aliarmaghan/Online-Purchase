@@ -51,10 +51,10 @@ namespace BusinessService
             DataTable dt = new DataTable();
             try
             {
-                string StoreProcedureName = "PROC_ADD_CATEGORY";
+                string StoreProcedureName = "PROC_ADD_SIZEMT";
                 SqlParameter[] prms = new SqlParameter[]
                    {
-                    _sqlFunctionSvc.CreateParameter("@CategJson",SqlDbType.NVarChar,-1,ParameterDirection.Input,jsonData),
+                    _sqlFunctionSvc.CreateParameter("@AddSizeMT",SqlDbType.NVarChar,-1,ParameterDirection.Input,jsonData),
                     _sqlFunctionSvc.CreateParameter("@MESSAGE",SqlDbType.VarChar,-1,ParameterDirection.Output,DBNull.Value),
                     _sqlFunctionSvc.CreateParameter("@RESPONSE",SqlDbType.Bit,1,ParameterDirection.Output,DBNull.Value),
 
@@ -76,7 +76,7 @@ namespace BusinessService
             try
             {
                 await Task.Delay(0);
-                string query = "Delete from Size_MT where Size_ID =" + id + "";
+                string query = "Delete from Size_MT where Size_Id =" + id + "";
 
 
                 string result = _sqlFunctionSvc.ExecStrSingleValue(query);

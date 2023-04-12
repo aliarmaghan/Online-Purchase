@@ -659,19 +659,19 @@ namespace BeWitcHinG.Areas.Admin.Controllers
                 {
                     if (model.Size_Id > 0)
                     {
-                        _response.Message = "Size has been Updated Succesfully!";
+                        _response.Message = "Size Type has been Updated Succesfully!";
                         _response.StatusCode = HttpStatusCode.OK;
                     }
                     else
                     {
-                        _response.Message = "SIze has been Created Succesfully!";
+                        _response.Message = "Size Type has been Created Succesfully!";
                         _response.StatusCode = HttpStatusCode.OK;
                     }
 
                 }
                 else
                 {
-                    _response.Message = "Size could not created! Please contact to admin";
+                    _response.Message = "Size Type could not created! Please contact to admin";
                     _response.StatusCode = HttpStatusCode.BadRequest;
                 }
             }
@@ -699,6 +699,27 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
             return Json(_response, JsonRequestBehavior.AllowGet);
 
+        }
+        [AjaxOnly]
+        [HttpPost]
+        public async Task<ActionResult> DeleteSizeMT(int id)
+        {
+            //await Task.Delay(0);
+            Response _response = new Response();
+
+            bool result = await sizemTSvc.DeleteSizeMT(id);
+
+            if (result)
+            {
+                _response.Message = "Size Type has been Deleted Succesfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            else
+            {
+                _response.Message = "Size Type could not delete. Please contact to support team";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
         }
 
 

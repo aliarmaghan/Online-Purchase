@@ -90,4 +90,12 @@
     "cityModels": null
   }
 
+  {
+    "Size_Id": 0,
+    "Size_Type": "Alphabet",
+    "IS_ACTIVE": true,
+    "USERID": "7bf7c3c5-1970-4983-aee9-5899a5101a70",
+    "sizeMTModels": null
+  }
+
 }
