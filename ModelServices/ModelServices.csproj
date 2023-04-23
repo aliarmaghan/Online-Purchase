@@ -52,7 +52,10 @@
     <Compile Include="AdminModel\CountryModel.cs" />
     <Compile Include="AdminModel\GenderBaseModel.cs" />
     <Compile Include="AdminModel\GenderModel.cs" />
+    <Compile Include="AdminModel\SizeDetailBaseModel.cs" />
+    <Compile Include="AdminModel\SizeDetailModel.cs" />
     <Compile Include="AdminModel\StateModel.cs" />
+    <Compile Include="AdminModel\UniqueAnswersOnlyAttribute.cs" />
     <Compile Include="AdminModel\UserAddressModel.cs" />
     <Compile Include="AdminModel\UserProfileModel.cs" />
     <Compile Include="LoginDetailModel.cs" />

@@ -1,0 +1,53 @@
+﻿@using ModelServices.AdminModel
+@model SizeDetailBaseModel
+
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>*@
+
+<!-- Modal -->
+<div class="modal fade" id="AddUpdateSizeDT" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <form method="post" id="formSizeDT">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Size</h5>
+                    <button type="button" class="btn-close btnClose" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hdnSizeDT" value="" />
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Size Type</label>
+                            @Html.DropDownList("Ref_Size_Id", Enumerable.Empty<SelectListItem>(), "--Select Size Type--", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                            @Html.ValidationMessageFor(m => m.Ref_Size_Id, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12 form-group" id="alpa_Size_Name">
+                            <label>Alpabet Size</label>
+                            @Html.TextBoxFor(x => x.A_Size_Name, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.A_Size_Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12 form-group" id="num_Size_Name">
+                            <label>Numeric Size</label>
+                            @Html.TextBoxFor(x => x.N_Size_Name, new { @class = "form-control"  })
+                            @Html.ValidationMessageFor(m => m.N_Size_Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class=" form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                @Html.CheckBoxFor(x => x.IS_ACTIVE, new { @class = "form-check-input", @type = "checkbox" })Is Active
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary btnClose">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary" id="btnAddUpdate">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

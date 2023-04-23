@@ -13,6 +13,8 @@ using BusinessService;
 using BusinessService.Helper;
 using ModelServices;
 using System.Net;
+using System.Drawing;
+using System.ComponentModel.DataAnnotations;
 
 namespace BeWitcHinG.Areas.Admin.Controllers
 {
@@ -31,6 +33,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         BrandSvc brandSvc = new BrandSvc();
         Response _response = new Response();
         SizeMTSvc sizemTSvc = new SizeMTSvc();
+        SizeDTSvc sizedTSvc = new SizeDTSvc();
         public MasterController()
         {
 
@@ -368,6 +371,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
         #endregion
 
+
         #region Category
         [HttpGet]
         public async Task<ActionResult> Category(int? id)
@@ -623,7 +627,6 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         #endregion
 
 
-
         #region Size_MT
 
         [HttpGet]
@@ -722,13 +725,104 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             return Json(_response, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
 
 
+        #region Size Detail
+        [HttpGet]
+        public async Task<ActionResult> SizeDetail(int? id)
+        {
+            await Task.Delay(0);
+            return View();
+        }  
+        // ajax call
+        [HttpGet]
+        [AjaxOnly]
+        public async Task<ActionResult> GetSizeDetailList(int? id = 0)
+        {
+            SizeDetailBaseModel sizeDetailBase = new SizeDetailBaseModel();
 
+            Response _response = new Response();
+            var model = await sizedTSvc.GetSizeDetailList(id);
+            var sizetypeList =  await sizemTSvc.GetSizeMTList(0);
+            sizeDetailBase.sizeDetails = model;
+            sizeDetailBase.sizeMTModels = sizetypeList;
 
+            _response.Message = "Fetched Successfully.";
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = JsonConvert.SerializeObject(sizeDetailBase);
 
+            return Json(_response, JsonRequestBehavior.AllowGet);
 
+        }
+        // ajax call
+        [HttpPost]
+        [AjaxOnly]
+        public async Task<ActionResult> AddSizeDT(SizeDetailBaseModel model)
+        {
+            Response _response = new Response();
 
+            string userId = await GetLoggedInUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                model.USERID = user.Id;
+
+                var jsonString = JsonConvert.SerializeObject(model);
+
+                bool isTrue = await sizedTSvc.AddSizeDT(jsonString);
+
+                if (isTrue)
+                {
+                    if (model.S_Id > 0)
+                    {
+                        _response.Message = "Size has been Updated Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+                    else
+                    {
+                        _response.Message = "Size has been Added Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+
+                }
+                else
+                {
+                    _response.Message = "Size could not created! Please contact to admin";
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                }
+            }
+            else
+            {
+                _response.Message = "Your are not authorize to access or manipulate data";
+                _response.StatusCode = HttpStatusCode.Unauthorized;
+            }
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+        [AjaxOnly]
+        [HttpPost]
+        public async Task<ActionResult> DeleteSizeDT(int id)
+        {
+            //await Task.Delay(0);
+            Response _response = new Response();
+
+            bool result = await sizedTSvc.DeleteSizeDT(id);
+
+            if (result)
+            {
+                _response.Message = "Size has been Deleted Succesfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            else
+            {
+                _response.Message = "Size could not delete. Please contact to support team";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
+        }
 
 
         #endregion

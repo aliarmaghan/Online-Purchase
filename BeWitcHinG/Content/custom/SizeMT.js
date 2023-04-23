@@ -1,11 +1,13 @@
-﻿let userList;
+﻿var userList;
 $(function () {
+
+
     //click event opening popup
     $('#btnAdd').click(function () {
         /*$("#roleError").text("");*/
 
         $('#exampleModalLabel').text('');
-        $('#exampleModalLabel').text('Add Size MT');
+        $('#exampleModalLabel').text('Add Size Type');
         $('#btnAddUpdate').text('');
         $('#btnAddUpdate').text('Submit');
         $('#AddUpdateSizeMT').modal('show');
@@ -18,6 +20,34 @@ $(function () {
         debugger
         // second way to validate if element contains form element
         if ($('#formSizeMT').valid()) {
+            let flagCheckType = true;
+
+
+            $.map(userList, function (v, i) {
+
+                if (v.Size_Type.toLowerCase() === $('#Size_Type').val().toLowerCase()) {
+                    flagCheckType = false;
+                }
+            })
+
+
+            if (flagCheckType == false) {
+
+                $.toast({
+                    heading: "Duplicate Data",
+                    text: $('#Size_Type').val() + " is already added.",
+                    showHideTransition: 'slide',
+                    icon: "error",
+                    position: 'top-right',
+                });
+
+                return false;
+            }
+
+            // checking if exist
+
+
+
 
             let isActive = false;
             let sizeType = $('#Size_Type').val();
@@ -38,9 +68,12 @@ $(function () {
                 IS_ACTIVE: isActive,
                 Size_Id: parseInt(sizeId)
             }
-
+            //var ans = dupValidate(obj)
             $('#tableSizeMT').DataTable();
+            //if (ans == false) {
             addSizeMT(obj);
+            //}
+
         }
     });
 
@@ -49,12 +82,15 @@ $(function () {
         resetForm();
         $('#AddUpdateSizeMT').modal('hide');
     });
-
-    getSizeMTData(0);
+    debugger;
+    var result = getSizeMTData(0);
+    result = JSON.parse(result)
+    userList = JSON.parse(result.Data);
+    console.log(userList)
     $('#tableSizeMT').DataTable();
 
 
-    
+
 });
 
 
@@ -116,15 +152,15 @@ function addSizeMT(sizeMTData) {
     });
 }
 
-
 // get getSizeMTData
 function getSizeMTData(id) {
     debugger
-    $.ajax({
+    return $.ajax({
         type: 'GET',
         url: "/admin/master/GetSizeMTList?id=" + id + "",
         contentType: "application/json",
         dataType: "json",
+        async: false,
         //data: JSON.stringify(categData),
 
         //headers: {
@@ -137,9 +173,12 @@ function getSizeMTData(id) {
             //console.log(result.Data);
             //console.log(JSON.parse(result.Data));
 
-            userList = JSON.parse(result.Data);
+            //userList = JSON.parse(result.Data);
             //calling function bind the data
-            bindTable(userList);
+            bindTable(JSON.parse(result.Data));
+
+            //userList = JSON.parse(result.Data);
+
 
             if (result.StatusCode == 200) {
                 $.toast({
@@ -171,16 +210,14 @@ function getSizeMTData(id) {
             });
             $('#AddUpdateSizeMT').modal('hide');
         }
-    });
+    }).responseText;
 }
-
-
-
 
 
 
 //bind table
 function bindTable(data) {
+
     debugger;
     let dynamicString = '';
     dynamicString += '<table class="table table-hover" id="tableSizeMT">';
@@ -238,7 +275,9 @@ function bindTable(data) {
     });
 
 }
-// get category on edit
+
+
+// get edit 
 function geteditdata(id) {
 
     $.ajax({
@@ -279,8 +318,6 @@ function geteditdata(id) {
 
 
 }
-
-
 
 //RESETTING THE FORM ELEMENT
 function resetForm() {
@@ -325,3 +362,111 @@ function deleteSzMt(id) {
         }
     });
 }
+
+
+function dupValidate(obj) {
+    var rv = true;
+    debugger
+    $.ajax({
+        type: 'GET',
+        url: "/admin/master/GetSizeMTList",
+        contentType: "application/json",
+        dataType: "json",
+
+        success: function (result) {
+            //console.log(result);
+            //console.log(result.StatusCode);
+            //console.log(result.Message);
+            //console.log(result.Data);
+            //console.log(JSON.parse(result.Data));
+
+            userList = JSON.parse(result.Data);
+            //console.log(userList);
+            //$for(let i = 0; i < userList.length; i++){
+            //    if (value.Size_Type == obj.Size_Type) {
+            //        $.toast({
+            //            heading: "Error",
+            //            text: "Duplicate Data",
+            //            showHideTransition: 'slide',
+            //            icon: "warning",
+            //            position: 'top-right',
+            //        });
+            //        //$("#Size_Type").focus(function () {
+            //        //    $(this).addClass("focused");
+            //        //});
+
+            //        $('#AddUpdateSizeMT').modal('show');
+            //        rv = true;
+            //        alert(rv);
+
+            //    } else {
+            //        rv = false;
+            //        alert(rv);
+
+            //    }
+            //    return rv;
+            //}
+            $.each(userList, function (index, value) {
+                console.log(value.Size_Type);
+                console.log(obj.Size_Type);
+                if (value.Size_Type == obj.Size_Type) {
+                    $.toast({
+                        heading: "Duplicate Data",
+                        text: "You can't insert duplicate data",
+                        showHideTransition: 'slide',
+                        icon: "warning",
+                        position: 'top-right',
+                    });
+                    //$("#Size_Type").focus(function () {
+                    //    $(this).addClass("focused");
+                    //});
+
+                    $('#AddUpdateSizeMT').modal('hide');
+                    rv = true;
+                    alert(rv);
+
+                } else {
+                    rv = false;
+                    alert(rv);
+
+                }
+                return rv;
+            });
+
+            //else {
+            //    $.toast({
+            //        heading: "Error",
+            //        text: result.Message,
+            //        showHideTransition: 'slide',
+            //        icon: "error",
+            //        position: 'top-right',
+            //    });
+            //}
+
+        },
+        error: function () {
+            $.toast({
+                heading: "Error",
+                text: "Error : Request could not be processed. Try again Later",
+                showHideTransition: 'slide',
+                icon: "error",
+                position: 'top-right',
+            });
+            $('#AddUpdateSizeMT').modal('hide');
+        }
+
+    });
+}
+
+
+
+//function returnType(1) {
+
+//    if (1 == 1) {
+//        return true;
+//    }
+//    else {
+//        return false;
+//    }
+
+//}

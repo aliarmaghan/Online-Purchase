@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace ModelServices.AdminModel
 {
-    public class SizeMTModel
+    public class SizeDetailModel
     {
-        public int Size_Id { get; set; }
-        [Required(ErrorMessage = "Please enter Size Type name")]
-        [UniqueAnswersOnly]
+        public int S_Id { get; set; }
+        [Required(ErrorMessage = "Please enter Size name")]
+        public string Size_Name { get; set; }
+        public int Ref_Size_Id { get; set; }
         public string Size_Type { get; set; }
         public bool IS_ACTIVE { get; set; }
         public string CREATED_DATE { get; set; }

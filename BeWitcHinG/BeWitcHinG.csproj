@@ -199,6 +199,7 @@
     <Content Include="Content\css\Toaster.css" />
     <Content Include="Content\custom\Category.js" />
     <Content Include="Content\custom\Gender.js" />
+    <Content Include="Content\custom\SizeDT.js" />
     <Content Include="Content\custom\SizeMT.js" />
     <Content Include="Content\images\client-images\shop.png" />
     <Content Include="Content\css\style.css" />
@@ -491,6 +492,8 @@
     <Content Include="Areas\Admin\Views\Shared\_UpdateGender.cshtml" />
     <Content Include="Areas\Admin\Views\Master\Size_MT.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AddUpdateSize_MT.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\SizeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AddUpdateSizeDT.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
