@@ -1,0 +1,29 @@
+﻿@using ModelServices.AdminModel
+@model CouponModel
+
+<input id="hdnMessage" type="hidden" value="@TempData["ResponseMessage"]" />
+<input id="hdnValue" type="hidden" value="@TempData["ResponseValue"]" />
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <a style="margin-left:960px" class="btn btn-sm btn-inverse-primary" id="btnAdd">Add<i class="mdi mdi-plus-box"></i></a>
+                <div id="divCoupon">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Areas/Admin/Views/Shared/_AddUpdateCoupon.cshtml",Model)
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/custom/Coupon.js"></script>
+}
+
+

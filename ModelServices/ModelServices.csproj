@@ -50,6 +50,8 @@
     <Compile Include="AdminModel\ChangePasswordModel.cs" />
     <Compile Include="AdminModel\CityModel.cs" />
     <Compile Include="AdminModel\CountryModel.cs" />
+    <Compile Include="AdminModel\CouponBaseModel.cs" />
+    <Compile Include="AdminModel\CouponModel.cs" />
     <Compile Include="AdminModel\GenderBaseModel.cs" />
     <Compile Include="AdminModel\GenderModel.cs" />
     <Compile Include="AdminModel\SizeDetailBaseModel.cs" />

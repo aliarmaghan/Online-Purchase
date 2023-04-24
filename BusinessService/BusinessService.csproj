@@ -53,6 +53,7 @@
     <Compile Include="CategorySvc.cs" />
     <Compile Include="CitySvc.cs" />
     <Compile Include="CountrySvc.cs" />
+    <Compile Include="CouponSvc.cs" />
     <Compile Include="GenderSvc.cs" />
     <Compile Include="Helper\AjaxOnlyAttribute.cs" />
     <Compile Include="Helper\ConverDataTableToGenericObject.cs" />
