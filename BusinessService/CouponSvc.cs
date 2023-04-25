@@ -67,25 +67,25 @@ namespace BusinessService
                 return false;
             }
         }
-        //public async Task<bool> DeleteGender(int id)
-        //{
+        public async Task<bool> DeleteCoupon(int id)
+        {
 
-        //    try
-        //    {
-        //        await Task.Delay(0);
-        //        string query = "Delete from gender_mt where id =" + id + "";
+            try
+            {
+                await Task.Delay(0);
+                string query = "Delete from Coupon_MT where COUPON_ID =" + id + "";
 
 
-        //        string result = _sqlFunctionSvc.ExecStrSingleValue(query);
-        //        return true;
+                string result = _sqlFunctionSvc.ExecStrSingleValue(query);
+                return true;
 
-        //    }
-        //    catch (Exception)
-        //    {
+            }
+            catch (Exception ex)
+            {
 
-        //        throw;
-        //    }
+                throw;
+            }
 
-        //}
+        }
     }
 }

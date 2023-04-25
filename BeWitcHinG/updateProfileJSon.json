@@ -120,4 +120,17 @@
     "sizeDetails": null,
     "sizeMTModels": null
   }
+  {
+    "COUPON_ID": 2,
+    "COUPON_NAME": "get50",
+    "REMARKS": "50%off",
+    "IS_ACTIVE": false,
+    "EXP_FROM": "2023-04-25",
+    "EXP_TO": "2023-04-29",
+    "CREATED_DATE": null,
+    "CREATED_BY": null,
+    "MODIFIED_DATE": null,
+    "MODIFIED_BY": null,
+    "USERID": "7bf7c3c5-1970-4983-aee9-5899a5101a70"
+  }
 }

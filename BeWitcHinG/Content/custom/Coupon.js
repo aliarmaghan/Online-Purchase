@@ -220,26 +220,28 @@ function bindTable(data) {
 
     $('#tableCoupon').DataTable();
 
-    ////CLICK EVENT FOR EDIT
-    //$('.btnEdit').click(function (e) {
-    //    e.preventDefault();
-    //    const szdtId = parseInt(e.currentTarget.dataset.szdtid);
-    //    geteditdata(szdtId);
+    //CLICK EVENT FOR EDIT
+    $('.btnEdit').click(function (e) {
+        debugger
+        e.preventDefault();
+        const cpnId = parseInt(e.currentTarget.dataset.cpnid);
+        geteditdata(cpnId);
 
-    //});
+    });
 
-    //////CLICK EVENT FOR DELETE
-    //$('.btnDelete').click(function (e) {
-    //    e.preventDefault();
-    //    const szdtId = parseInt(e.currentTarget.dataset.szdtid);
-    //    deleteSzMt(szdtId)
+    ////CLICK EVENT FOR DELETE
+    $('.btnDelete').click(function (e) {
+        debugger
+        e.preventDefault();
+        const cpnId = parseInt(e.currentTarget.dataset.cpnid);
+        deleteCoupon(cpnId)
 
-    //    setTimeout(function () {
+        setTimeout(function () {
 
-    //        getSizeDTData(0);
+            getCouponData(0);
 
-    //    }, 500);
-    //});
+        }, 500);
+    });
 
 
     
@@ -251,6 +253,87 @@ function resetForm() {
     $('#AddUpdateCoupon').find('form').trigger('reset');
     // removing validation when closing popup
     $('#formCoupon').find('span.text-danger.field-validation-valid').html("");
+
+
+}
+
+//Delete Coupon
+function deleteCoupon(id) {
+    $.ajax({
+        type: 'POST',
+        url: '/admin/master/DeleteCoupon?id=' + id + "",
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (result) {
+            //reseting form
+            resetForm();
+
+            $.toast({
+                heading: "Warning",
+                text: result.Message,
+                showHideTransition: 'slide',
+                icon: "warning",
+                position: 'top-right',
+            });
+        },
+        error: function () {
+            $.toast({
+                heading: "Error",
+                text: "Error : Request could not be processed. Try again Later",
+                showHideTransition: 'slide',
+                icon: "error",
+                position: 'top-right',
+            });
+
+        }
+    });
+}
+
+
+// get edit 
+function geteditdata(id) {
+    debugger
+    $.ajax({
+        type: 'GET',
+        url: "/admin/master/GetCouponList?id=" + id + "",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+            //reseting form
+            resetForm();
+            $('#exampleModalLabel').text('');
+            $('#exampleModalLabel').text('Update Coupon');
+            $('#btnAddUpdate').text('');
+            $('#btnAddUpdate').text('Update');
+
+            // setting the data to modal popup
+            let data = JSON.parse(result.Data);
+            let coupObj = data[0];
+            //console.log(szdtObj);
+            //let coupData = coupObj[0];
+            console.log(coupObj);
+            $('#COUPON_NAME').val(coupObj.COUPON_NAME);
+            $('#REMARKS').val(coupObj.REMARKS);
+            $('#EXP_FROM').val(coupObj.EXP_FROM);
+            $('#EXP_TO').val(coupObj.EXP_TO);
+            $('#IS_ACTIVE').prop('checked', coupObj.IS_ACTIVE);
+            $('#hdnCoupId').val(coupObj.COUPON_ID)
+            $('#AddUpdateCoupon').modal('show');
+
+
+        },
+        error: function () {
+            $.toast({
+                heading: "Error",
+                text: "Error : Request could not be processed. Try again Later",
+                showHideTransition: 'slide',
+                icon: "error",
+                position: 'top-right',
+            });
+
+        }
+    });
 
 
 }

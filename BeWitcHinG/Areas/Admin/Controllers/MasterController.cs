@@ -899,6 +899,26 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             return Json(_response, JsonRequestBehavior.AllowGet);
 
         }
+        [AjaxOnly]
+        [HttpPost]
+        public async Task<ActionResult> DeleteCoupon(int id)
+        {
+            Response _response = new Response();
+
+            bool result = await couponSvc.DeleteCoupon(id);
+
+            if (result)
+            {
+                _response.Message = "Coupon has been Deleted Succesfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            else
+            {
+                _response.Message = "Coupon could not delete. Please contact to support team";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
+        }
 
 
         #endregion
