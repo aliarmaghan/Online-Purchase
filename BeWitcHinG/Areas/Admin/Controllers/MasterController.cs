@@ -15,6 +15,7 @@ using ModelServices;
 using System.Net;
 using System.Drawing;
 using System.ComponentModel.DataAnnotations;
+using ModalServices.AdminModel;
 
 namespace BeWitcHinG.Areas.Admin.Controllers
 {
@@ -35,6 +36,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         SizeMTSvc sizemTSvc = new SizeMTSvc();
         SizeDTSvc sizedTSvc = new SizeDTSvc();
         CouponSvc couponSvc = new CouponSvc();
+        CategDTSvc categDTSvc = new CategDTSvc();
         public MasterController()
         {
 
@@ -467,6 +469,103 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             {
                 _response.Message = "Category could not delete. Please contact to support team";
                 _response.StatusCode = HttpStatusCode.OK;
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
+        #region Category Dt curd
+        [HttpGet]
+        public async Task<ActionResult> CategoryDT(int? id)
+        {
+            await Task.Delay(0);
+            return View();
+        }
+
+        public async Task<ActionResult> GetCategoryDetailsList(int? id = 0)
+        {
+            CategoryDtBaseModel categoryDtBaseModel = new CategoryDtBaseModel();
+
+            Response _response = new Response();
+            var model = await categDTSvc.GetCategoryDT(id);
+            var categoryList = await categorySvc.GetCategoryList(0);
+            categoryDtBaseModel.categList = model;
+            categoryDtBaseModel.categoryModels = categoryList;
+            _response.Message = "Fetched Successfully.";
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = JsonConvert.SerializeObject(categoryDtBaseModel);
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+
+        // ajax call
+        [HttpPost]
+        [AjaxOnly]
+        public async Task<ActionResult> AddCategoryDetails(CategoryDtBaseModel model)
+        {
+            Response _response = new Response();
+
+            string userId = await GetLoggedInUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                model.USERID = user.Id;
+
+                var jsonData = JsonConvert.SerializeObject(model);
+
+                bool isTrue = await categDTSvc.AddCategoryDetails(jsonData);
+
+                if (isTrue)
+                {
+                    if (model.ID > 0)
+                    {
+                        _response.Message = "Item has been Update Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+                    else
+                    {
+                        _response.Message = "Item has been Created Succesfully!";
+                        _response.StatusCode = HttpStatusCode.OK;
+                    }
+                }
+                else
+                {
+                    _response.Message = "Item could not created! Please contact to admin";
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                }
+            }
+            else
+            {
+                _response.Message = "Your are not authorize to access or manipulate data";
+                _response.StatusCode = HttpStatusCode.Unauthorized;
+            }
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+        [AjaxOnly]
+        [HttpPost]
+        public async Task<ActionResult> DeleteCategoryDetails(int id)
+        {
+            //await Task.Delay(0);
+            Response _response = new Response();
+            bool result = await categDTSvc.DeleteCategoryDetails(id);
+
+            if (result)
+            {
+
+                _response.Message = "Category has been Deleted Succesfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+            }
+            else
+            {
+                _response.Message = "Category could not delete. Please contact to support team!";
+                _response.StatusCode = HttpStatusCode.OK;
+
             }
             return Json(_response, JsonRequestBehavior.AllowGet);
         }

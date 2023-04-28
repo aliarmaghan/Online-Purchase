@@ -198,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Toaster.css" />
+    <Content Include="Content\custom\CategDT.js" />
     <Content Include="Content\custom\Category.js" />
     <Content Include="Content\custom\Coupon.js" />
     <Content Include="Content\custom\Gender.js" />
@@ -498,6 +499,9 @@
     <Content Include="Areas\Admin\Views\Shared\_AddUpdateSizeDT.cshtml" />
     <Content Include="Areas\Admin\Views\Master\Coupon.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AddUpdateCoupon.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AddCategDT.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_EditCategDT.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\CategoryDT.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

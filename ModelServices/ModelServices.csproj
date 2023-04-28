@@ -46,6 +46,8 @@
     <Compile Include="AdminModel\BrandBaseModel.cs" />
     <Compile Include="AdminModel\BrandModel.cs" />
     <Compile Include="AdminModel\CategoryBaseModel.cs" />
+    <Compile Include="AdminModel\CategoryDtBaseModel.cs" />
+    <Compile Include="AdminModel\CategoryDtModel.cs" />
     <Compile Include="AdminModel\CategoryModel.cs" />
     <Compile Include="AdminModel\ChangePasswordModel.cs" />
     <Compile Include="AdminModel\CityModel.cs" />

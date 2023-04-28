@@ -198,7 +198,19 @@
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("State", "Master", new { area = "Admin" })">State</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("City", "Master", new { area = "Admin" })">City</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("Department", "Master", new { area = "Admin" })">Department</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("Category", "Master", new { area = "Admin" })">Category</a></li>
+                                @*<li class="nav-item"> <a class="nav-link" href="@Url.Action("Category", "Master", new { area = "Admin" })">Category</a></li>*@
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="collapse" href="#u-basic" aria-expanded="false" aria-controls="u-basic">
+                                        <span class="menu-title">Category</span>
+                                        <i class="menu-arrow"></i>
+                                    </a>
+                                    <div class="collapse" id="u-basic">
+                                        <ul class="nav flex-column sub-menu">
+                                            <li class="nav-item"> <a class="nav-link" href="@Url.Action("Category", "Master", new { area = "Admin" })">Category List</a></li>
+                                            <li class="nav-item"> <a class="nav-link" href="@Url.Action("CategoryDT", "Master", new { area = "Admin" })">Category Inventory</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("Gender", "Master", new { area = "Admin" })">Gender</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="@Url.Action("Brand", "Master", new { area = "Admin" })">Brand</a></li>
                                 <li class="nav-item">

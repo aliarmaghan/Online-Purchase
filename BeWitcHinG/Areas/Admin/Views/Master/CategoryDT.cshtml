@@ -1,0 +1,30 @@
+﻿@using ModalServices.AdminModel
+@model CategoryDtBaseModel
+
+
+<input id="hdnMessage" type="hidden" value="@TempData["ResponseMessage"]" />
+<input id="hdnValue" type="hidden" value="@TempData["ResponseValue"]" />
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4>INVENTORY TABLE</h4>
+                <a style="margin-left:1035px" class="btn btn-sm btn-inverse-primary" id="btnCategDt">Add<i class="mdi mdi-plus"></i></a>
+                <div id="divCategDt"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Areas/Admin/Views/Shared/_AddCategDT.cshtml", Model)
+@Html.Partial("~/Areas/Admin/Views/Shared/_EditCategDT.cshtml", Model)
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/custom/CategDT.js"></script>
+}
+
+
+

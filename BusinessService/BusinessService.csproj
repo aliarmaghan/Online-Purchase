@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrandSvc.cs" />
+    <Compile Include="CategDTSvc.cs" />
     <Compile Include="CategorySvc.cs" />
     <Compile Include="CitySvc.cs" />
     <Compile Include="CountrySvc.cs" />

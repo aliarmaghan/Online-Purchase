@@ -1,0 +1,65 @@
+﻿@using ModalServices.AdminModel
+@model CategoryDtBaseModel
+
+
+
+
+<div class="modal fade" id="addCategDT" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <form method="post" id="formCategDT">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+                    <button type="button" class="btn-close btnClose" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hdnCategId" value="" />
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Category</label>
+                            @Html.DropDownList("CATEGORYID", Enumerable.Empty<SelectListItem>(), new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                            @Html.ValidationMessageFor(m => m.CATEGORYID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>item Name</label>
+                            @Html.TextBoxFor(x => x.ITEM_NAME, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ITEM_NAME, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Code</label>
+                            @Html.TextBoxFor(x => x.CODE, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CODE, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class=" form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                @Html.CheckBoxFor(x => x.IS_ACTIVE, new { @class = "form-check-input", @type = "checkbox" })Is Active
+                            </label>
+                        </div>
+                        @*<div class="container shadow min-vh-100 py-2">
+                            <h5>Bootstrap 5 date picker</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3 col-sm-6">
+                                    <label for="startDate">Start</label>
+                                    <input id="startDate" class="form-control" type="date" />
+                                    <span id="startDateSelected"></span>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <label for="endDate">End</label>
+                                    <input id="endDate" class="form-control" type="date" />
+                                    <span id="endDateSelected"></span>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary btnClose">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary btnAddCategDt" id="btnAddCategDt">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
