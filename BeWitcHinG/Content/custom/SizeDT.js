@@ -98,7 +98,7 @@ function getSizeDTData(id) {
             //console.log(result);
             //console.log(result.StatusCode);
             //console.log(result.Message);
-            //console.log(result.Data);
+            console.log(result.Data);
             //console.log(JSON.parse(result.Data));
 
             resultData = JSON.parse(result.Data);
@@ -293,16 +293,16 @@ function geteditdata(id) {
             if ($('#Ref_Size_Id :selected').text() === 'Alphabet') {
                 $("#num_Size_Name").hide();
                 $("#alpa_Size_Name").show();
+                $('#A_Size_Name').val(szdtData.Size_Name);
 
             }
             else {
                 $("#alpa_Size_Name").hide();
                 $("#num_Size_Name").show();
+                $('#N_Size_Name').val(szdtData.Size_Name);
 
             }
             //$('#Size_Name').val(szdtData.Size_Name);
-            $('#A_Size_Name').val(szdtData.Size_Name);
-            $('#N_Size_Name').val(szdtData.Size_Name);
             $('#IS_ACTIVE').prop('checked', szdtData.IS_ACTIVE);
             $('#hdnSizeDT').val(szdtData.S_Id)
             $('#AddUpdateSizeDT').modal('show');
