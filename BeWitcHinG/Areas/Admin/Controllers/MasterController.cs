@@ -37,6 +37,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         SizeDTSvc sizedTSvc = new SizeDTSvc();
         CouponSvc couponSvc = new CouponSvc();
         CategDTSvc categDTSvc = new CategDTSvc();
+        UserListSvc userListSvc = new UserListSvc();
         public MasterController()
         {
 
@@ -105,7 +106,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
                 if (result)
                 {
-                    if (model.ID > 0 )
+                    if (model.ID > 0)
                     {
                         TempData["ResponseMessage"] = "Country has been Created Succesfully!";
                         TempData["ResponseValue"] = 1;
@@ -122,7 +123,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
                     TempData["ResponseMessage"] = "Country could not Created. Please contact to support team";
                     TempData["ResponseValue"] = 0;
                 }
-                    
+
             }
 
             return View(model);
@@ -276,7 +277,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             return View(model);
 
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> AddCity()
         {
@@ -407,7 +408,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
                 if (isTrue)
                 {
-                    if(model.CATEGORY_ID > 0)
+                    if (model.CATEGORY_ID > 0)
                     {
                         _response.Message = "Category has been Updated Succesfully!";
                         _response.StatusCode = HttpStatusCode.OK;
@@ -417,7 +418,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
                         _response.Message = "Category has been Created Succesfully!";
                         _response.StatusCode = HttpStatusCode.OK;
                     }
-                    
+
                 }
                 else
                 {
@@ -575,7 +576,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
         #region Gender curd
         [HttpGet]
-        public async Task<ActionResult> Gender(int ? id)
+        public async Task<ActionResult> Gender(int? id)
         {
             GenderBaseModel genderBaseModel = new GenderBaseModel();
             await Task.Delay(0);
@@ -583,13 +584,13 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             genderBaseModel.Genders = model;
             return View(genderBaseModel);
         }
-    
+
         // ajax call
         [HttpPost]
         [AjaxOnly]
         public async Task<ActionResult> AddGender(GenderModel model)
         {
-            
+
             ModelState.Remove("ID");
 
             string userId = await GetLoggedInUserId();
@@ -834,7 +835,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         {
             await Task.Delay(0);
             return View();
-        }  
+        }
         // ajax call
         [HttpGet]
         [AjaxOnly]
@@ -844,7 +845,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
 
             Response _response = new Response();
             var model = await sizedTSvc.GetSizeDetailList(id);
-            var sizetypeList =  await sizemTSvc.GetSizeMTList(0);
+            var sizetypeList = await sizemTSvc.GetSizeMTList(0);
             sizeDetailBase.sizeDetails = model;
             sizeDetailBase.sizeMTModels = sizetypeList;
 
@@ -942,7 +943,7 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             Response _response = new Response();
             var model = await couponSvc.GetCouponList(id);
             couponBaseModel.Coupons = model;
-            
+
 
             _response.Message = "Fetched Successfully.";
             _response.StatusCode = HttpStatusCode.OK;
@@ -1018,6 +1019,35 @@ namespace BeWitcHinG.Areas.Admin.Controllers
             }
             return Json(_response, JsonRequestBehavior.AllowGet);
         }
+
+
+        #endregion
+
+        #region User List
+        [HttpGet]
+        public async Task<ActionResult> UserList(int? id)
+        {
+            await Task.Delay(0);
+            return View();
+        }
+        [HttpGet]
+        [AjaxOnly]
+        public async Task<ActionResult> GetUserList(int? id = 0)
+        {
+            UserListBaseModel userListBase = new UserListBaseModel();
+            Response _response = new Response();
+            var model = await userListSvc.GetUserList(id);
+            userListBase.userlists = model;
+
+
+            _response.Message = "Fetched Successfully.";
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = JsonConvert.SerializeObject(model);
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
+
 
 
         #endregion

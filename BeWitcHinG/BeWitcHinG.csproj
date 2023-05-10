@@ -204,6 +204,7 @@
     <Content Include="Content\custom\Gender.js" />
     <Content Include="Content\custom\SizeDT.js" />
     <Content Include="Content\custom\SizeMT.js" />
+    <Content Include="Content\custom\UserList.js" />
     <Content Include="Content\images\client-images\shop.png" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\dashboard\circle.png" />
@@ -502,6 +503,8 @@
     <Content Include="Areas\Admin\Views\Shared\_AddCategDT.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_EditCategDT.cshtml" />
     <Content Include="Areas\Admin\Views\Master\CategoryDT.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\UserList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AddUpdateUserList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

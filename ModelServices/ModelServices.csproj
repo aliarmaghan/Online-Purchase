@@ -61,6 +61,8 @@
     <Compile Include="AdminModel\StateModel.cs" />
     <Compile Include="AdminModel\UniqueAnswersOnlyAttribute.cs" />
     <Compile Include="AdminModel\UserAddressModel.cs" />
+    <Compile Include="AdminModel\UserListBaseModel.cs" />
+    <Compile Include="AdminModel\UserListModel.cs" />
     <Compile Include="AdminModel\UserProfileModel.cs" />
     <Compile Include="LoginDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
