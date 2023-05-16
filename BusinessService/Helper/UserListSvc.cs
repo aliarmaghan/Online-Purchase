@@ -16,7 +16,7 @@ namespace BusinessService.Helper
         ConverDataTableToGenericObject genericObject = new ConverDataTableToGenericObject();
         ConvertDataTableToGenericList genericList = new ConvertDataTableToGenericList();
 
-        public async Task<List<UserListModel>> GetUserList(int? id)
+        public async Task<List<UserListModel>> GetUserList(string id)
         {
             await Task.Delay(0);
             DataTable dt = new DataTable();
@@ -41,6 +41,31 @@ namespace BusinessService.Helper
             {
 
                 throw;
+            }
+        }
+        public async Task<bool> AddUserDetails(string jsonData)
+        {
+            await Task.Delay(0);
+            DataTable dt = new DataTable();
+            try
+            {
+                string StoreProcedureName = "PROC_ADD_USER_USERADDRESS_TEST";
+                SqlParameter[] prms = new SqlParameter[]
+                   {
+                    _sqlFunctionSvc.CreateParameter("@UserJson",SqlDbType.NVarChar,-1,ParameterDirection.Input,jsonData),
+                    _sqlFunctionSvc.CreateParameter("@MESSAGE",SqlDbType.VarChar,-1,ParameterDirection.Output,DBNull.Value),
+                    _sqlFunctionSvc.CreateParameter("@RESPONSE",SqlDbType.Bit,1,ParameterDirection.Output,DBNull.Value),
+                   };
+
+                dt = _sqlFunctionSvc.ExecProcDataTable(StoreProcedureName, ref prms);
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
+                return false;
             }
         }
     }

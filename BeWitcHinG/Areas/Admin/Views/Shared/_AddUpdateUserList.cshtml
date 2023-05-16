@@ -1,0 +1,96 @@
+﻿@using ModelServices.AdminModel
+@model UserListBaseModel
+
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>*@
+
+<!-- Modal -->
+<div class="modal fade" id="AddUpdateUserList" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form method="post" id="formUserList">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="btn-close btnClose" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hdnuslistId" value="" />
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Role</label>
+                            @Html.DropDownList("ROLE_ID", Enumerable.Empty<SelectListItem>(), "--Select Role--", new { @class = "form-control form-control-sm  menu-arrow", @style = "color:#040404;"  })
+                            @Html.ValidationMessageFor(m => m.ROLE_ID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>USERNAME</label>
+                            @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.USERNAME, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>EMAIL</label>
+                            @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>PHONE NUMBER</label>
+                            @Html.TextBoxFor(x => x.PHONENUMBER, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PHONENUMBER, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>PASSWORD</label>
+                            @Html.TextBoxFor(x => x.PASSWORD, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PASSWORD, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <div class="row">
+                            <div style="text-align:center">
+                                <h4>
+                                    Add Address
+                                </h4>
+                            </div>
+                            <div class="col-md-6  form-group">
+                                <label>ADDRESS</label>
+                                @Html.TextBoxFor(x => x.ADDRESS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ADDRESS, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>LANDMARK </label>
+                                @Html.TextBoxFor(x => x.LANDMARK, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.LANDMARK, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>PINCODE</label>
+                                @Html.TextBoxFor(x => x.PINCODE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.PINCODE, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>COUNTRY</label>
+                                @Html.DropDownList("ID", Enumerable.Empty<SelectListItem>(), "--Select Country--", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.ID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>STATE</label>
+                                @Html.DropDownList("STATEID", Enumerable.Empty<SelectListItem>(), "--Select Country--", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.STATEID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>CITY</label>
+                                @Html.DropDownList("CITYID", Enumerable.Empty<SelectListItem>(), "--Select Country--", new { @class = "form-control form-control-sm", @style = "color:#040404;" })
+                                @Html.ValidationMessageFor(m => m.CITYID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary btnClose">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary" id="btnAddUpdate">Save</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+

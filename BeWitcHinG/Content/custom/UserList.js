@@ -1,20 +1,36 @@
 ﻿$(function () {
     //Click Event For Open Pop-up
-    //$('#btnAdd').click(function () {
-    //    $('#exampleModalLabel').text('');
-    //    $('#exampleModalLabel').text('Add User List');
-    //    $('#btnAddUpdate').text('');
-    //    $('#btnAddUpdate').text('Submit');
-    //    //$('#AddUpdateCoupon').modal('show');
-    //});
+    $('#btnAdd').click(function () {
+        $('#exampleModalLabel').text('');
+        $('#exampleModalLabel').text('Add User');
+        $('#btnAddUpdate').text('');
+        $('#btnAddUpdate').text('Submit');
+        $('#AddUpdateUserList').modal('show');
+    });
+
+    $("form#formUserList").submit(function (event) {
+        event.preventDefault();
+        debugger
+        if ($('#formUserList').valid()) {
+            var formData = new FormData(this);
+            console.log(formData)
+
+            AddUserDetail(formData);
+
+        }
+        return false;
+    });
+    
+
+    // close event
+    $('.btnClose').click(function () {
+        resetForm();
+        $('#AddUpdateUserList').modal('hide');
+    });
+
+
     getUserListData(0);
-
-    //// close event
-    //$('.btnClose').click(function () {
-    //    resetForm();
-    //    $('#AddUpdateCoupon').modal('hide');
-    //});
-
+    //$('#tableUserList').DataTable();
 
     
 });
@@ -29,23 +45,17 @@ function getUserListData(id) {
         contentType: "application/json",
         dataType: "json",
         async: false,
-        //data: JSON.stringify(categData),
-
-        //headers: {
-        //    'X-XSRF-TOKEN': getCookie("XSRF-TOKEN"),
-        //},
+ 
         success: function (result) {
-            //console.log(result);
-            //console.log(result.StatusCode);
-            //console.log(result.Message);
-            //console.log(result.Data);
             console.log(result.Data);
-            //console.log(JSON.parse(result.Data));
+            resultData = JSON.parse(result.Data);
 
-            //userList = JSON.parse(result.Data);
             //calling function bind the data
-            bindTable(JSON.parse(result.Data));
-
+            bindTable(resultData.userlists);
+            bindDropDownCountry(resultData.countryModels);
+            bindDropDownRole(resultData.roleModels);
+            bindDropDownState(resultData.stateModels);
+            bindDropDownCity(resultData.cityModels);
             //userList = JSON.parse(result.Data);
 
 
@@ -81,6 +91,66 @@ function getUserListData(id) {
         }
     })
 }
+
+function AddUserDetail(userData) {
+    debugger;
+    $.ajax({
+        url: "/admin/master/AddUser",
+        type: 'POST',
+        data: userData,
+        success: function (result) {
+            resetForm();
+            $('#hdnuslistId').val('');
+            if (result.StatusCode == 200) {
+                $.toast({
+                    heading: "Success",
+                    text: result.Message,
+                    showHideTransition: 'slide',
+                    icon: "success",
+                    position: 'top-right',
+                });
+
+                // calling all the data
+                setTimeout(function () {
+
+                    getUserListData(0);
+
+                }, 500);
+            }
+            else {
+                $.toast({
+                    heading: "Error",
+                    text: result.Message,
+                    showHideTransition: 'slide',
+                    icon: "error",
+                    position: 'top-right',
+                });
+            }
+            $('#AddUpdateUserList').modal('hide');
+
+        },
+        error: function () {
+            $.toast({
+                heading: "Error",
+                text: "Error : Request could not be processed. Try again Later",
+                showHideTransition: 'slide',
+                icon: "error",
+                position: 'top-right',
+            });
+            $('#AddUpdateUserList').modal('hide');
+
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+
+
+    });
+
+
+}
+
+
 
 //bind Table
 function bindTable(data) {
@@ -149,7 +219,56 @@ function bindTable(data) {
 
     //    }, 500);
     //});
+}
+
+//bind DropDownRole
+function bindDropDownRole(data) {
+    $("#ROLE").empty();
+    var optionhtml = '';
+    optionhtml += '<option value="" selected disabled>--Select Role--</option>';
+    $.each(data, function (key, val) {
+        optionhtml += '<option value="' + val.ID + '">' + val.ROLE + '</option>';
+    });
+    $("#ROLE").append(optionhtml);
+}
+
+//RESETTING THE FORM ELEMENT
+function resetForm() {
+    ///resetting all the fields inside the form
+    $('#AddUpdateUserList').find('form').trigger('reset');
+    // removing validation when closing popup
+    $('#formUserList').find('span.text-danger.field-validation-valid').html("");
 
 
+}
 
+//bind DropDownCountry
+function bindDropDownCountry(data) {
+    $("#ID").empty();
+    var optionhtml = '';
+    optionhtml += '<option value="" selected disabled>--Select Country--</option>';
+    $.each(data, function (key, val) {
+        optionhtml += '<option value="' + val.ID + '">' + val.COUNTRY_NAME + '</option>';
+    });
+    $("#ID").append(optionhtml);
+}
+//bind DropDownState
+function bindDropDownState(data) {
+    $("#STATEID").empty();
+    var optionhtml = '';
+    optionhtml += '<option value="" selected disabled>--Select State--</option>';
+    $.each(data, function (key, val) {
+        optionhtml += '<option value="' + val.STATEID + '">' + val.STATENAME + '</option>';
+    });
+    $("#STATEID").append(optionhtml);
+}
+//bind DropDownCity
+function bindDropDownCity(data) {
+    $("#CITYID").empty();
+    var optionhtml = '';
+    optionhtml += '<option value="" selected disabled>--Select City--</option>';
+    $.each(data, function (key, val) {
+        optionhtml += '<option value="' + val.CITYID + '">' + val.CITYNAME + '</option>';
+    });
+    $("#CITYID").append(optionhtml);
 }

@@ -61,6 +61,7 @@
     <Compile Include="Helper\ConvertDataTableToGenericList.cs" />
     <Compile Include="Helper\MasterDataSvc.cs" />
     <Compile Include="Helper\Response.cs" />
+    <Compile Include="Helper\UserListSvc.cs" />
     <Compile Include="IUserProfileSvc.cs" />
     <Compile Include="LoginDetailSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

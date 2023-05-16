@@ -87,5 +87,35 @@ namespace BusinessService.Helper
             }
 
         }
+        public async Task<List<RoleModel>> GetUserRole(string id)
+        {
+            await Task.Delay(0);
+            DataTable dt = new DataTable();
+            try
+            {
+                string StoreProcedureName = "GetUserRole";
+                SqlParameter[] prms = new SqlParameter[] 
+                {
+                _sqlFunctionSvc.CreateParameter("@ID",SqlDbType.VarChar,-1,ParameterDirection.Input,id),
+                _sqlFunctionSvc.CreateParameter("@MESSAGE",SqlDbType.VarChar,-1,ParameterDirection.Output,DBNull.Value),
+                _sqlFunctionSvc.CreateParameter("@RESPONSE",SqlDbType.Bit,1,ParameterDirection.Output,DBNull.Value),
+                };
+
+                dt = _sqlFunctionSvc.ExecProcDataTable(StoreProcedureName, ref prms);
+
+                var userRole = genericList.GenerateGenericList<RoleModel>(dt);
+
+
+
+
+                return userRole;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

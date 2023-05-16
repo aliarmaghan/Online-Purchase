@@ -16,6 +16,9 @@ using System.Net;
 using System.Drawing;
 using System.ComponentModel.DataAnnotations;
 using ModalServices.AdminModel;
+using BeWitcHinG.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace BeWitcHinG.Areas.Admin.Controllers
 {
@@ -38,6 +41,8 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         CouponSvc couponSvc = new CouponSvc();
         CategDTSvc categDTSvc = new CategDTSvc();
         UserListSvc userListSvc = new UserListSvc();
+        MasterDataSvc masterDataSvc = new MasterDataSvc();
+        UserListBaseModel userListBase = new UserListBaseModel();
         public MasterController()
         {
 
@@ -1032,24 +1037,114 @@ namespace BeWitcHinG.Areas.Admin.Controllers
         }
         [HttpGet]
         [AjaxOnly]
-        public async Task<ActionResult> GetUserList(int? id = 0)
+        public async Task<ActionResult> GetUserList(string id )
         {
             UserListBaseModel userListBase = new UserListBaseModel();
             Response _response = new Response();
+            var Cmodel = await masterDataSvc.CountryList();
+            var Smodel = await masterDataSvc.StateList();
+            var CTmodel = await masterDataSvc.CityList();
+            var role = await masterDataSvc.GetUserRole(id);
+            userListBase.roleModels = role;
+            userListBase.countryModels = Cmodel;
+            userListBase.cityModels = CTmodel;
+            userListBase.stateModels = Smodel;
             var model = await userListSvc.GetUserList(id);
             userListBase.userlists = model;
 
 
             _response.Message = "Fetched Successfully.";
             _response.StatusCode = HttpStatusCode.OK;
-            _response.Data = JsonConvert.SerializeObject(model);
+            _response.Data = JsonConvert.SerializeObject(userListBase);
 
             return Json(_response, JsonRequestBehavior.AllowGet);
 
         }
+        // ajax call
+        [HttpPost]
+        [AjaxOnly]
+        public async Task<ActionResult> AddUser(FormCollection collection)
+        {
+            Response _response = new Response();
+            userListBase.ADDRESS = collection["ADDRESS"];
+            //userListBaseModel.PROFILE_PIC_PATH = collecton["ImageDataImageData"];
+            userListBase.ROLE = collection["ROLE"];
+            userListBase.USERNAME = collection["USERNAME"];
+            userListBase.EMAIL = collection["EMAIL"];
+            userListBase.PHONENUMBER = collection["PHONENUMBER"];
+            userListBase.PASSWORD = collection["PASSWORD"];
+            userListBase.LANDMARK = collection["LANDMARK"];
+            userListBase.ID = Int32.Parse(collection["ID"]);
+
+            userListBase.STATEID = Int32.Parse(collection["STATEID"]);
+            userListBase.CITYID = Int32.Parse(collection["CITYID"]);
+            userListBase.PINCODE = collection["PINCODE"];
+
+            await Task.Delay(0);
+
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
 
+            var User = new ApplicationUser
+            {
+                Email = userListBase.EMAIL,
+                UserName = userListBase.USERNAME,
+                EmailConfirmed = true,
+                PhoneNumber = userListBase.PHONENUMBER,
+                PhoneNumberConfirmed = true,
+
+            };
+
+            string userPWD = userListBase.PASSWORD;
+
+            var chkUser = UserManager.Create(User, userPWD);
+
+            if (chkUser.Succeeded)
+            {
+                var user = UserManager.FindByEmail(userListBase.EMAIL);
+                if (user != null)
+                {
+
+                    userListBase.USERID = user.Id;
+
+                    var jsonData = JsonConvert.SerializeObject(userListBase);
+                    bool isTrue = await userListSvc.AddUserDetails(jsonData);
+
+                    if (isTrue)
+                    {
+                        if (string.IsNullOrEmpty(userListBase.USERID))
+                        {
+                            _response.Message = "User has been Update Succesfully!";
+                            _response.StatusCode = HttpStatusCode.OK;
+
+                        }
+                        else
+                        {
+                            _response.Message = "User has been Created Succesfully!";
+                            _response.StatusCode = HttpStatusCode.OK;
+                        }
+                    }
+                    else
+                    {
+                        _response.Message = "User could not created! Please contact to admin";
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                    }
+                }
+
+            }
+            else
+            {
+                _response.Message = "Your are not authorize to access or manipulate data";
+                _response.StatusCode = HttpStatusCode.Unauthorized;
+            }
+
+
+            return Json(_response, JsonRequestBehavior.AllowGet);
+
+        }
         #endregion
 
 

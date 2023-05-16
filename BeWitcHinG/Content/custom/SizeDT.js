@@ -337,7 +337,7 @@ function resetForm() {
 
 //bind DropDown
 function bindDropDown(data) {
-    $("#Ref_Size_Id").empty();
+    //$("#Ref_Size_Id").empty();
     debugger
     var optionhtml = '';
     
